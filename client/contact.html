@@ -1,0 +1,54 @@
+<template name="contact">
+  {{> header}}
+
+ <div class="page-header">
+    <h1>Зворотній зв’язок</h1>
+  </div>
+ {{#if formResult}}
+ <div class="alert alert-success alert-dismissable">
+<!--   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+   Дякуємо! Ваш лист відправлено.
+ </div>
+ {{/if}}
+ {{#if formError}}
+ <div class="alert alert-danger alert-dismissable">
+<!--   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+   {{formError}}
+ </div>
+ {{/if}}
+  <p>
+    Будь-ласка, використовуйте цю форму для зв’язку з нами.
+  </p>
+<span class="form-horizontal" role="form">
+    <div class="form-group">
+      <label for="inputName" class="col-lg-2 control-label">Ваше ім’я</label>
+      <div class="col-lg-10">
+	{{#constant}}<input type="name" class="form-control inputName" placeholder="Ваше ім’я">{{/constant}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Ваш Email</label>
+      <div class="col-lg-10">
+	{{#constant}}<input type="email" class="form-control inputEmail" placeholder="john@example.com">{{/constant}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputSubject" class="col-lg-2 control-label">Тема</label>
+      <div class="col-lg-10">
+	{{#constant}}<input type="text" class="form-control inputSubject" placeholder="Тема повідомлення">{{/constant}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputMessage" class="col-lg-2 control-label">Повідомлення</label>
+      <div class="col-lg-10">
+	{{#constant}}<textarea class="form-control inputMessage" rows="3" placeholder="Текст повідомлення"></textarea>{{/constant}}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-offset-2 col-lg-10">
+	<button class="btn btn-default send">Надіслати</button>
+      </div>
+    </div>
+    </span>
+</template>

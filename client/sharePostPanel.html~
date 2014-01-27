@@ -1,0 +1,47 @@
+<template name="postPanel">
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-lg-9">
+	<div class="form-group">
+	  <label class="col-lg-2 control-label">Text</label>
+	  <div class="col-lg-10">
+	    <textarea class="form-control" rows="3"> 
+	      {{text}}
+	    </textarea>
+	  </div>
+	</div>
+	<div class="form-group">
+	  <label class="col-lg-2 control-label">URL</label>
+	  <div class="col-lg-10">
+	    <input type="text" class="form-control" placeholder="{{url}}">
+	  </div>
+	</div>
+	<div class="form-group">
+	  <label class="col-lg-2 control-label">Balance</label>
+	  <div class="col-lg-10">
+	    <div class="input-group">
+	      <input type="text" class="form-control" placeholder="{{balance}}">	    
+	      <span class="input-group-btn">
+		<button class="btn btn-danger save" type="button">UPDATE</button>
+	      </span>
+	    </div>
+	  </div>
+	</div>
+      </div>
+      <div class="col-lg-3">
+	<div class="row">
+	  Shared by: {{sharedByCount}} </br>
+	  Points spent: {{pointsSpent}}</br>
+	  <a href="{{bitly}}+" traget="_blank">Statistics</a>
+	</div>
+	</br>
+	<div class="row">
+	  <button class="btn btn-danger stop" type="button">STOP</button>
+	  <button class="btn btn-danger delete" type="button"><span class="glyphicon glyphicon-trash"></span></button>
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
+</template>

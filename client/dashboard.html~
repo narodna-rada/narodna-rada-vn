@@ -1,0 +1,106 @@
+<template name="dashboard">
+{{#if currentUser}}
+{{> header}}
+  {{#if showAddNewProjectDialog}}
+    {{> addprojectDialog}}
+  {{/if}}
+<div class="row hidden-xs">
+  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" align="center">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+	<h3 class="panel-title">My options</h3>
+      </div>
+      <div class="panel-body">
+	<div class="row">
+	  <div class="col-lg-4" align="center"><button type="button" class="btn btn-danger btn-lg addnewproject">Add project</button></div>
+	  <div class="col-lg-4" align="center"><a href="/dashboard/myprojects"><button type="button" class="btn btn-success btn-lg managemyprojects">Projects <span class="badge">{{myProjectsCount}}</span></button></a></div>
+	  <div class="col-lg-4" align="center"><a href="/dashboard/mysubscriptions"><button type="button" class="btn btn-primary btn-lg managemysubscriptions">Following <span class="badge">{{mySubscriptionsCount}}</span></button></a></div>	
+	</div>    
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" align="center">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+	<h3 class="panel-title">All projects</h3>
+      </div>
+      <div class="panel-body">
+	<div class="row">
+	  <div class="col-lg-4" align="center"><a href="/dashboard/preparing"><button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-pause" style="color:#428bca"></span> Preparing <span class="badge">{{preparingCount}}</span></button></a></div>	
+	  <div class="col-lg-4" align="center"><a href="/dashboard/funding"><button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-play" style="color:#76cc1e"></span> Funding <span class="badge">{{fundingCount}}</span></button></a></div>	
+	  <div class="col-lg-4" align="center"><a href="/dashboard/finished"><button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-stop" style="color:#000000"></span> Finished <span class="badge">{{finishedCount}}</span></button></a></div>	
+	</div>    
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row visible-xs">
+  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" align="center">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+	<h3 class="panel-title">My options</h3>
+      </div>
+      <div class="panel-body">
+	<div class="row">
+	  <div class="col-lg-4" align="center"><button type="button" class="btn btn-danger btn-xs addnewproject">Add project</button></div>
+	  <div class="col-lg-4" align="center"><a href="/dashboard/myprojects"><button type="button" class="btn btn-success btn-xs managemyprojects">Projects <span class="badge">{{myProjectsCount}}</span></button></a></div>
+	  <div class="col-lg-4" align="center"><a href="/dashboard/mysubscriptions"><button type="button" class="btn btn-primary btn-xs managemysubscriptions">Following <span class="badge">{{mySubscriptionsCount}}</span></button></a></div>	
+	</div>    
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" align="center">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+	<h3 class="panel-title">All projects</h3>
+      </div>
+      <div class="panel-body">
+	<div class="row">
+	  <div class="col-lg-4" align="center"><a href="/dashboard/preparing"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pause" style="color:#428bca"></span> Preparing <span class="badge">{{preparingCount}}</span></button></a></div>	
+	  <div class="col-lg-4" align="center"><a href="/dashboard/funding"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-play" style="color:#76cc1e"></span> Funding <span class="badge">{{fundingCount}}</span></button></a></div>	
+	  <div class="col-lg-4" align="center"><a href="/dashboard/finished"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-stop" style="color:#000000"></span> Finished <span class="badge">{{finishedCount}}</span></button></a></div>	
+	</div>    
+      </div>
+    </div>
+  </div>
+</div>
+{{else}}
+  {{gotohome}}
+{{/if}}
+</template>
+
+<template name="addprojectDialog">
+
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title">Add new project</h4>
+    </div>
+    <div class="modal-body">
+      
+	{{#if error}}
+	<div class="alert alert-danger fade in">
+          {{error}}
+	</div>
+	{{/if}}
+
+	{{#if showParsingStatus}}
+
+	<div class="progress progress-striped active">
+	  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{parsingStatus}}" aria-valuemin="0" aria-valuemax="100" style="width: {{parsingStatus}}%">
+	    <span class="sr-only">{{parsingStatus}}% complete </span>
+	  </div>
+	</div>
+
+	{{/if}}
+
+	<div class="input-group">
+	  {{#constant}}<input type="text" class="form-control newprojecturl" placeholder="New project URL">{{/constant}}
+	  <span class="input-group-btn">
+            <button class="btn btn-danger save" type="button">Go!</button>
+	  </span>
+	</div>
+    </div>
+  </div>
+&nbsp;
+</template>

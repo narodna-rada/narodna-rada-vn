@@ -1,0 +1,156 @@
+App = {
+    subs : {
+	posts : Meteor.subscribe ('Posts')
+    }    
+};
+
+Meteor.startup (function () {
+    Deps.autorun(function(){
+	if (Meteor.userId())
+	    Router.go('/dashboard');
+    }); 
+});
+
+Template.header.currentBalance = function () {
+    return Meteor.user().balance;
+};
+
+Template.layout.currentYear = function () {
+    return new Date().getFullYear();
+};
+
+//Below is the helper to make active the needed menu items
+Template.header.helpers({
+    activeRouteClass: function() {
+        var args = Array.prototype.slice.call(arguments, 0);
+        args.pop();
+        var active = _.any(args, function(name) {
+            return location.pathname === Router.path(name);
+        });
+        return active && 'active';
+    }
+});
+
+Template.dashboard.helpers({
+    gotohome : function (){
+	return Router.go('/');
+    }
+});
+
+Template.dashboard.events({
+    'click .addNewPost':function () {
+	if (! Session.get("showAddPostDialog")) {
+	    openAddPostDialog();}
+	else {
+	    Session.set("showAddPostDialog", false);};
+	return false;
+  }
+});
+
+var openAddPostDialog = function () {
+    if (Meteor.userId()) {
+	Session.set("showAddPostDialog", true);
+	Session.set("createError", null);
+    };
+};
+
+var closeAddPostDialog = function () {
+    Session.set("showAddPostDialog", false);
+    Session.set("createError", null);
+};
+
+Template.dashboard.showAddPostDialog = function (){return Session.get("showAddPostDialog");};
+
+Template.addPostDialog.events({
+    'click .save': function (event, template) {
+
+	var newPostText = template.find(".newPostText").value;
+	var newPostUrl = template.find(".newPostUrl").value;
+	var newPostBalance = template.find(".newPostBalance").value;
+	previousError='';
+	Session.set("createError", '');
+	options={};
+	options.url=newPostUrl;
+	options.text=newPostText;
+	options.balance=newPostBalance;
+
+	if (newPostUrl.length) 
+	{
+	    if (!(Session.get("createError"))) Session.set("createError", '');
+            //add http:// if needed                                                                 
+            if (! (newPostUrl.indexOf("http://")==0 || newPostUrl.indexOf("https://")==0)) {newPostUrl="http://"+newPostUrl;};
+
+	} else {
+	    previousError=Session.get("createError");
+	    Session.set("createError",
+			previousError+"<li>Post URL needed.</li>");
+	};
+
+
+
+	if (newPostText.length) 
+	{
+	    if (!(Session.get("createError"))) Session.set("createError", '');
+	    
+	} else {
+	    previousError=Session.get("createError");
+	    Session.set("createError",
+			previousError+"<li>Describe you post so everybody may understand what he shares.</li>");
+	};
+
+	if (newPostBalance>0) 
+	{
+	    if (!(Session.get("createError"))) Session.set("createError", '');
+
+	} else {
+	    previousError=Session.get("createError");
+	    Session.set("createError",
+			previousError+"<li>Set how many promo points you want to use for this post.</li>");
+	};
+
+	if (!(Session.get("createError"))) {
+	    Meteor.call('createPost', options, function (error,result){
+		if (! error) {
+		    closeAddPostDialog();
+		}
+		else {
+		    Session.set("createError", error);
+		};
+	    });
+	};
+
+    },
+    'click .close': function (event, template) {
+	closeAddPostDialog();
+	return false;
+    },
+    
+    'keypress .newPostUrl': function (event, template) {
+	Session.set("createError", null);
+    },
+    
+    'keypress .newPostText': function (event, template) {
+	Session.set("createError", null);
+    },
+    
+    'keypress .newPostBalance': function (event, template) {
+	Session.set("createError", null);
+    }
+});
+
+
+Template.addPostDialog.error = function () {
+  return Session.get("createError");
+};
+
+Template.dashboard.myPosts = function (){
+    return Posts.find({owner:Meteor.userId()}).fetch();
+};
+
+Template.dashboard.myPostsCount = function (){
+    return Posts.find({owner:Meteor.userId()}).count();
+};
+
+Template.dashboard.allActivePosts = function () {
+    return Posts.find({status:'active'}).fetch();
+};

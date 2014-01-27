@@ -1,0 +1,46 @@
+Template.contact.events({
+    'click .send': function(event,template){
+//	event.preventDefault();
+	name = template.find(".inputName").value;
+	if (name.length===0) {
+            Session.set("messageSent", null);
+	    Session.set("sentError","Name may not be empty");
+	} else {
+	    from = template.find(".inputEmail").value;
+	    if (!(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(from))) {
+		Session.set("messageSent", null);
+		Session.set("sentError","Please, enter valid e-mail");
+	    } else {
+		subject = template.find(".inputSubject").value;
+		if (subject.length===0) {
+		    Session.set("messageSent", null);
+		    Session.set("sentError","Subject may not be empty");
+		} else {
+		    message = template.find(".inputMessage").value;
+		    if (message.length===0) {
+			Session.set("messageSent", null);
+			Session.set("sentError","Message may not be empty");
+		    } else {
+			Meteor.call('sendEmail', "shareexchange.com@gmail.com", name+'<'+from+'>', subject, message, function (error, result){
+			    if (! error) {
+				Session.set("messageSent", true);
+				Session.set("sentError", null);
+			    } else {
+				Session.set("messageSent", null);
+				Session.set("sentError",error.message);
+			    };
+ 			});
+		    };
+		};
+	    };
+	};
+    }
+});
+
+Template.contact.formError = function (){
+    return Session.get("sentError");
+};
+
+Template.contact.formResult = function (){
+    return Session.get("messageSent");
+};
