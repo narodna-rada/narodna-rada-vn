@@ -1,0 +1,36 @@
+<template name="dashboard">
+{{> header}}
+{{#if currentUser}}
+	{{> dashboardMenu}}
+{{else}}
+  {{gotohome}}
+{{/if}}
+</template>
+
+<template name="dashboardMenu">
+<div class="row">
+	{{#if checkRole "admin"}}
+	<a class="btn btn-default" href="/dashboard/usersEdit" role="button">Адміністрування прав користувачів</a>
+	{{else}}
+		{{#if checkRole "superEditor"}}
+			<a class="btn btn-default" href="/dashboard/usersEdit" role="button">Адміністрування прав користувачів</a>
+		{{/if}}
+	{{/if}}	
+
+	{{#if checkRole "admin"}}
+		<a class="btn btn-default" href="/dashboard/postsEdit" role="button">Додавання / редагування / видалення текстів</a>
+	{{else}}
+		{{#if checkRole "editor"}}
+			<a class="btn btn-default" href="/dashboard/postsEdit" role="button">Додавання / редагування / видалення текстів</a>
+		{{else}}
+			{{#if checkRole "superEditor"}}
+				<a class="btn btn-default" href="/dashboard/postsEdit" role="button">Додавання / редагування / видалення текстів</a>
+			{{else}}
+				<br><br>Користувачі з відповідними правами можуть адмініструвати права інших користувачів а також додавати / 					редагувати / видаляти тексти на цьому сайті.
+				<br>Отже, якщо ви не бачите посиланнь на такі можливості - зверніться через "Зв’язок" до адміністратора 				сайта с проханням надати вам відповідний рівень доступу.
+			{{/if}}
+		{{/if}}
+	{{/if}}
+</div>
+</br>
+</template>

@@ -1,0 +1,63 @@
+<template name="postsEdit">
+{{> header}}
+{{> dashboardMenu}}
+	{{#if checkRole "admin"}}
+		{{> postsList}}
+	{{else}}
+		{{#if checkRole "editor"}}
+			{{> postsList}}
+		{{else}}
+			{{#if checkRole "superEditor"}}
+				{{> postsList}}
+			{{else}}
+				<br><br>Користувачі з відповідними правами можуть адмініструвати права інших користувачів а також додавати / 					редагувати / видаляти тексти на цьому сайті.
+				<br>Отже, якщо ви не бачите посиланнь на такі можливості - зверніться через "Зв’язок" до адміністратора 				сайта с проханням надати вам відповідний рівень доступу.
+			{{/if}}
+		{{/if}}
+	{{/if}}
+</template>
+
+<template name="postsList">
+<div class="row">
+<form role="form">
+  <div class="form-group">
+    <label for="category">Category</label>
+    <select class="form-control" id="category">
+      <option value="">News - Vinnytsya</option>
+      <option>News - Ukraine & World</option>
+      <option>Narodna Rada</option>
+      <option>Dopomoga - volunteer</option>
+      <option>Dopomoga - food</option>
+      <option>Dopomoga - drugs</option>
+      <option>Dopomoga - clothes</option>
+      <option>Dopomoga - tech</option>
+      <option>Dopomoga - payForPhone</option>
+      <option>Dopomoga - money</option>
+      <option>Dopomoga - overInternet</option>
+      <option>Dopomoga - survivals</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="header">Header</label>
+    <input type="text" class="form-control" id="header" placeholder="Header">
+  </div>
+  <div class="form-group">
+    <label for="annotation">Annotation</label>
+    <textarea class="form-control" rows="2" id="annotation"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="annotation">Main text</label>
+    <textarea class="form-control" rows="4" id="newsText"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="picture">Upload picture</label>
+    <input type="file" id="picture">
+  </div>
+  <div class="form-group">
+    <label for="videoLink">Link to video</label>
+    <input type="url" class="form-control" id="videoLink" placeholder="Link to video at youtube, ustream, VK">
+  </div>
+  <button type="submit" class="btn btn-success">Submit</button>
+</form>
+</div>
+</template>

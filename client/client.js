@@ -27,8 +27,8 @@ Template.header.helpers({
     }
 });
 
-Template.dashboard.helpers({
-    gotohome : function (){
-	return Router.go('/');
-    }
+/*
+Meteor.logout(function(){
+    return Router.go('/');
 });
+*/

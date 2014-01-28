@@ -1,0 +1,87 @@
+<template name="usersEdit">
+{{> header}}
+{{> dashboardMenu}}
+	{{#if checkRole "admin"}}
+		{{> usersList}}
+	{{else}}
+		{{#if checkRole "superEditor"}}
+			{{> usersList}}
+		{{else}}
+			<br><br>Користувачі з відповідними правами можуть адмініструвати права інших користувачів а також додавати / 				редагувати / видаляти тексти на цьому сайті.
+			<br>Отже, якщо ви не бачите посиланнь на такі можливості - зверніться через "Зв’язок" до адміністратора 			сайта с проханням надати вам відповідний рівень доступу.
+		{{/if}}
+	{{/if}}
+</template>
+
+<template name="usersList">
+  <div class="row">
+    <h2>Change roles for selected users</h2>
+    <table class="table table-bordered">
+      <tr>
+	<td>
+	  <div class="radio">
+	    <label>
+	      <input type="radio" name="roleRadios" id="optionsRadios1" value="user">
+	      User
+	    </label>
+	  </div>
+	</td>
+	
+	<td>
+	  <div class="radio">
+	    <label>
+	      <input type="radio" name="roleRadios" id="optionsRadios2" value="editor">
+	      Editor
+	    </label>
+	  </div>
+	</td>
+	
+	<td>
+	  <div class="radio">
+	    <label>
+	      <input type="radio" name="roleRadios" id="optionsRadios3" value="superEditor">
+	      Super Editor
+	    </label>
+	  </div>
+	</td>
+	
+	<td>
+	  <div class="radio">
+	    <label>
+	      <input type="radio" name="roleRadios" id="optionsRadios4" value="admin">
+	      Admin
+	    </label>
+	  </div>
+	</td>
+
+	<td>
+	  <button class="btn btn-danger save" type="button">SAVE</button>
+	</td>
+	
+      </tr>
+    </table>
+  </div>
+
+  <div class="row">
+      <div class="table-responsive">
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <td><b></b></td>
+	      <td><b>E-mail</b></td>
+	      <td><b>Role selection</b></td>
+	    </tr>
+	  </thead>
+	  {{#each allUsers}}
+  	  <tr>
+	    <td>
+	      <input type="checkbox" value="{{_id}}" name="users">
+	    </td>
+	    <td>{{emails.0.address}}</td>
+	    <td>{{role}}</td>
+	  </tr>
+	  {{/each}}
+	</table>
+      </div>
+  </div>
+</template>

@@ -111,6 +111,7 @@ code {
                     <li class="{{activeRouteClass 'payForPhone'}}"><a href="/dopomoga/payForPhone">Поповнити телефон</a></li>
                     <li class="{{activeRouteClass 'money'}}"><a href="/dopomoga/money">Грошима</a></li>
                     <li class="{{activeRouteClass 'overInternet'}}"><a href="/dopomoga/overInternet">Через Інтернет</a></li>
+                    <li class="{{activeRouteClass 'survivals'}}"><a href="/dopomoga/survivals">Допомога постраждалим</a></li>
                   </ul>
                 </li>
  

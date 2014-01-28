@@ -81,6 +81,17 @@ Router.map (function ()
 
     this.route('dashboard');
 
+    this.route('usersEdit',{
+	template : 'usersEdit',
+	path : '/dashboard/usersEdit'
+    });
+
+    this.route('postsEdit',{
+	template : 'postsEdit',
+	path : '/dashboard/postsEdit'
+    });
+
+
     this.route('notFound', { path: '*' });
 });
 
@@ -88,6 +99,22 @@ var NonEmptyString = Match.Where(function (x) {
     check(x, String);                                                                                                             
     return x.length !== 0;                                                                                     
 });
+
+Meteor.users.allow({
+
+    insert: function () {
+	return false; 
+    },
+
+    update: function () {
+	if ((Meteor.user().role!='admin') && (Meteor.user().role!='superEditor')) return false;
+    },
+
+    remove: function () {
+	return false; 
+  }
+});
+
 
 Meteor.methods({
     // Declaring a method
