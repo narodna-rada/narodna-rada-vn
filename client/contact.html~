@@ -2,12 +2,12 @@
   {{> header}}
 
  <div class="page-header">
-    <h1>Contact us</h1>
+    <h1>Зворотній зв’язок</h1>
   </div>
  {{#if formResult}}
  <div class="alert alert-success alert-dismissable">
 <!--   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
-   Thank you! Your message went out.
+   Дякуємо! Ваш лист відправлено.
  </div>
  {{/if}}
  {{#if formError}}
@@ -16,39 +16,43 @@
    {{formError}}
  </div>
  {{/if}}
-  <p>
-    Please, use this form to send us a message.
-  </p>
-<span class="form-horizontal" role="form">
-    <div class="form-group">
-      <label for="inputName" class="col-lg-2 control-label">Name</label>
-      <div class="col-lg-10">
-	{{#constant}}<input type="name" class="form-control inputName" placeholder="John Doe">{{/constant}}
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Email</label>
-      <div class="col-lg-10">
-	{{#constant}}<input type="email" class="form-control inputEmail" placeholder="john@example.com">{{/constant}}
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputSubject" class="col-lg-2 control-label">Subject</label>
-      <div class="col-lg-10">
-	{{#constant}}<input type="text" class="form-control inputSubject" placeholder="Message subject">{{/constant}}
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputMessage" class="col-lg-2 control-label">Message</label>
-      <div class="col-lg-10">
-	{{#constant}}<textarea class="form-control inputMessage" rows="3" placeholder="Text of your message"></textarea>{{/constant}}
-      </div>
-    </div>
-
-    <div class="form-group">
-      <div class="col-lg-offset-2 col-lg-10">
-	<button class="btn btn-default send">Send</button>
-      </div>
-    </div>
-    </span>
+ <div class="row">
+   <div class="col-lg-9">
+     <p>
+       Будь-ласка, використовуйте цю форму для зв’язку з нами.
+     </p>
+     <span class="form-horizontal" role="form">
+       <div class="form-group">
+	 <label for="inputName" class="col-lg-2 control-label">Ваше ім’я</label>
+	 <div class="col-lg-10">
+	   {{#constant}}<input type="name" class="form-control inputName" placeholder="Ваше ім’я">{{/constant}}
+	 </div>
+       </div>
+       <div class="form-group">
+	 <label for="inputEmail" class="col-lg-2 control-label">Ваш Email</label>
+	 <div class="col-lg-10">
+	   {{#constant}}<input type="email" class="form-control inputEmail" placeholder="john@example.com">{{/constant}}
+	 </div>
+       </div>
+       <div class="form-group">
+	 <label for="inputSubject" class="col-lg-2 control-label">Тема</label>
+	 <div class="col-lg-10">
+	   {{#constant}}<input type="text" class="form-control inputSubject" placeholder="Тема повідомлення">{{/constant}}
+	 </div>
+       </div>
+       <div class="form-group">
+	 <label for="inputMessage" class="col-lg-2 control-label">Повідомлення</label>
+	 <div class="col-lg-10">
+	   {{#constant}}<textarea class="form-control inputMessage" rows="3" placeholder="Текст повідомлення"></textarea>{{/constant}}
+	 </div>
+       </div>
+       
+       <div class="form-group">
+	 <div class="col-lg-offset-2 col-lg-10">
+	   <button class="btn btn-default send">Надіслати</button>
+	 </div>
+       </div>
+     </span>
+   </div>
+     {{> rightColumn}}
 </template>

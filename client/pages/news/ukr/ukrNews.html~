@@ -1,0 +1,25 @@
+<template name="ukrNews#a">
+          <div class="row">
+	    <div class="col-lg-12">
+	      <h2>Заголовок</h2>
+	      <p>Аннотація</p>
+	      <p align="right"><a class="btn btn-default" href="/news/ukrNews" role="button">Читати повністю</a></p>
+	    </div>
+	  </div>
+
+</template>
+<template name="ukrNews#f">
+
+          <div class="row">
+	    <div class="col-lg-12">
+	      <h2>Заголовок</h2>
+		<p>Дата</p>
+	      <p>Текст</p><p>
+Текст
+</p>
+<a href="http://vinbazar.com/news/drugoe/u-vinnitsi-vidminili-piketuvannya-miskoyi-radi" target="_blank">Посилання на джерело</a>
+	    </div>
+	  </div>
+
+
+</template>

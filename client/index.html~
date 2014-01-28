@@ -75,7 +75,7 @@ code {
     </div>
     <div id="footer">
       <div class="container">
-        <p class="text-muted credit">2013 - {{currentYear}} &copy; <a href="http://shareitfor.me">Вінницький майдан</a>.</p>
+        <p class="text-muted credit">{{currentYear}} &copy; <a href="http://maidan.vn.ua">Вінницький майдан</a>.</p>
       </div>
     </div>
 </template>
@@ -97,13 +97,36 @@ code {
 
 <!-- see the client.js for the activeRouteClass --> 
               <li class="{{activeRouteClass 'home'}}"><a href="/">Головна</a></li>
-              <li class="{{activeRouteClass 'how-it-works'}}"><a href="/how-it-works">Народна рада</a></li>
+
+              <li class="{{activeRouteClass 'narodna-rada'}}"><a href="/narodna-rada">Народна рада</a></li>
+
+<li class="dropdown {{activeRouteClass 'volunteers'}} {{activeRouteClass 'food'}} {{activeRouteClass 'drugs'}} {{activeRouteClass 'clothes'}} {{activeRouteClass 'tech'}} {{activeRouteClass 'payForPhone'}} {{activeRouteClass 'money'}} {{activeRouteClass 'overInternet'}}">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Як допомогти<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li class="{{activeRouteClass 'volunteers'}}"><a href="/dopomoga/volunteers">Стань волонтером</a></li>
+                    <li class="{{activeRouteClass 'food'}}"><a href="/dopomoga/food">Їжею</a></li>
+                    <li class="{{activeRouteClass 'drugs'}}"><a href="/dopomoga/drugs">Ліками</a></li>
+                    <li class="{{activeRouteClass 'clothes'}}"><a href="/dopomoga/clothes">Одягом</a></li>
+                    <li class="{{activeRouteClass 'tech'}}"><a href="/dopomoga/tech">Забезпеченням побуту</a></li>
+                    <li class="{{activeRouteClass 'payForPhone'}}"><a href="/dopomoga/payForPhone">Поповнити телефон</a></li>
+                    <li class="{{activeRouteClass 'money'}}"><a href="/dopomoga/money">Грошима</a></li>
+                    <li class="{{activeRouteClass 'overInternet'}}"><a href="/dopomoga/overInternet">Через Інтернет</a></li>
+                  </ul>
+                </li>
+ 
+<li class="dropdown {{activeRouteClass 'vinNews'}} {{activeRouteClass 'ukrNews'}}">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Новини<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li class="{{activeRouteClass 'vinNews'}}"><a href="/news/vinNews">Новини Вінниці</a></li>
+                    <li class="{{activeRouteClass 'ukrNews'}}"><a href="/news/ukrNews">Новини України</a></li>
+                  </ul>
+                </li>
+
               <li class="{{activeRouteClass 'contact'}}"><a href="/contact">Зв’язок</a></li>
             </ul>
 	    <ul class="nav navbar-nav navbar-right">
 	        {{#if currentUser}}
 		<li class="{{activeRouteClass 'dashboard'}}"><a href="/dashboard">Зона дій</a></li>		
-
 		{{/if}}
                 {{ loginButtons }}
 	    </ul>
@@ -113,11 +136,4 @@ code {
       {{#if emailNotVerified}}
       <div class="alert alert-danger">Ви не можете працювати у приватній області сайту доки не підтвердите ваш e-mail. <button class="btn btn-md btn-success resendVerificationEmail {{ifActive}}">Відправити верифікаційне посилання на e-mail повторно.</button></div>
       {{/if}}
-</template>
-
-<template name="home">
-{{> header}}
-    <div class="container">
-	тут буде необхідний текст
-    </div>
 </template>

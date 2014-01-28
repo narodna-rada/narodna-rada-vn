@@ -1,0 +1,16 @@
+<template name="press-center">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Пресс-центр</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="container">
+                ПІБ контактної особи та фото</br>
+                телефони для зв’язку</br>
+                \u0447\u0430\u0441\u0438 \u0440\u043E\u0431\u043E\u0442\u0438</br>
+            </div>
+          </div>
+        </div>
+      </div>
+</template>

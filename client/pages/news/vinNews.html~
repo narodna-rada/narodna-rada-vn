@@ -1,0 +1,15 @@
+<template name="vinNews">
+  {{> header}}
+  <div class="page-header">
+    <h1>Новини Вінниці</h1>
+  </div>
+  <div class="col-lg-9">
+	{{> vinNews1f}}
+<br>
+	{{> vinNews2f}}
+<br><br>
+  </div>
+
+  {{> rightColumn}}
+  {{> bottomRow}}
+</template>

@@ -1,0 +1,34 @@
+<template name="home">
+{{> header}}
+<div class="container">
+  <div class="row">
+ 
+   <div class="col-lg-5">
+      <div class="panel panel-default">
+	<div class="panel-heading">
+          <h3 class="panel-title">Новини Вінниці</h3>
+	</div>
+	<div class="panel-body">
+		{{> vinNews2a}}
+		{{> vinNews1a}}
+	</div>
+      </div>
+   </div>
+
+   <div class="col-lg-4">
+      <div class="panel panel-default">
+	<div class="panel-heading">
+          <h3 class="panel-title">Новини України</h3>
+	</div>
+	<div class="panel-body">
+	</div>
+      </div>
+   </div>
+
+{{> rightColumn}}
+
+{{> bottomRow}}
+
+  </div>
+</div>
+</template>

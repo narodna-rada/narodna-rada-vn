@@ -23,6 +23,62 @@ Router.map (function ()
 	path : '/contact'
     });    
 
+    this.route('vinNews',{
+	template : 'vinNews',
+	path : '/news/vinNews'
+    });
+
+    this.route('ukrNews',{
+	template : 'ukrNews',
+	path : '/news/ukrNews'
+    });
+
+    this.route('volunteers',{
+	template : 'volunteers',
+	path : '/dopomoga/volunteers'
+    });
+
+    this.route('food',{
+	template : 'food',
+	path : '/dopomoga/food'
+    });
+
+    this.route('drugs',{
+	template : 'drugs',
+	path : '/dopomoga/drugs'
+    });
+
+    this.route('clothes',{
+	template : 'clothes',
+	path : '/dopomoga/clothes'
+    });
+
+    this.route('tech',{
+	template : 'tech',
+	path : '/dopomoga/tech'
+    });
+
+    this.route('payForPhone',{
+	template : 'payForPhone',
+	path : '/dopomoga/payForPhone'
+    });
+
+    this.route('money',{
+	template : 'money',
+	path : '/dopomoga/money'
+    });
+
+    this.route('overInternet',{
+	template : 'overInternet',
+	path : '/dopomoga/overInternet'
+    });
+
+    this.route('survivals',{
+	template : 'survivals',
+	path : '/dopomoga/survivals'
+    });
+
+
     this.route('dashboard');
 
     this.route('notFound', { path: '*' });
