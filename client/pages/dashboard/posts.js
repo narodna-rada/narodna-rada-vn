@@ -20,7 +20,7 @@ Template.postsList.events({
 		template.find('#category').value="";
 		template.find('#header').value="";
 		template.find('#annotation').value="";
-		template.find('#newsText').value="";
+		$('#newsText').data("wysihtml5").editor.clear();
 		template.find('#sourceLink').value="";
 		template.find('#picture').value="";
 		template.find('#videoLink').value="";
@@ -30,6 +30,24 @@ Template.postsList.events({
 		//show error status
 	    };
 	});
+    },
+
+    'click .clean':function(event,template){
+	event.preventDefault();
+
+	if (Session.get('postToEdit')) Session.set('postToEdit',null);
+
+	//reset form
+
+	template.find('#category').value="";
+	template.find('#header').value="";
+	template.find('#annotation').value="";
+	template.find('#newsText').value="";
+	$('#newsText').data("wysihtml5").editor.clear();
+	template.find('#sourceLink').value="";
+	template.find('#picture').value="";
+	template.find('#videoLink').value="";
+
     }
 });
 
@@ -95,17 +113,16 @@ Template.buttonsEditDelete.events({
     'click .edit':function(event,template){
 	Session.set('postToEdit',event.currentTarget.id);
 	if (location.pathname==='/dashboard/postsEdit') {
-    if (Session.get('postToEdit')) {
-	postToEdit=Posts.findOne({_id:Session.get('postToEdit')});
-        $("#category").val(postToEdit.category);
-        $("#header").val(postToEdit.header);
-        $("#annotation").val(postToEdit.annotation);
-        $("#newsText").val(postToEdit.newsText);
-        $("#sourceLink").val(postToEdit.sourceLink);
-//        $("#picture").val(postToEdit.picture);
-        $("#videoLink").val(postToEdit.videoLink);
-     };
-
+	    if (Session.get('postToEdit')) {
+		postToEdit=Posts.findOne({_id:Session.get('postToEdit')});
+		$("#category").val(postToEdit.category);
+		$("#header").val(postToEdit.header);
+		$("#annotation").val(postToEdit.annotation);
+		$('#newsText').data("wysihtml5").editor.setValue(postToEdit.newsText)
+		$("#sourceLink").val(postToEdit.sourceLink);
+		//        $("#picture").val(postToEdit.picture);
+		$("#videoLink").val(postToEdit.videoLink);
+	    };
 	}
 	else {
 	    Router.go('/dashboard/postsEdit');
@@ -118,12 +135,15 @@ Template.buttonsEditDelete.events({
 });
     
 Template.postsList.rendered = function () {
+//    $('#newsText').wysihtml5({locale:"ua-UA"});
+    $('#newsText').wysihtml5();
+
     if (Session.get('postToEdit')) {
 	postToEdit=Posts.findOne({_id:Session.get('postToEdit')});
         $("#category").val(postToEdit.category);
         $("#header").val(postToEdit.header);
         $("#annotation").val(postToEdit.annotation);
-        $("#newsText").val(postToEdit.newsText);
+	$('#newsText').data("wysihtml5").editor.setValue(postToEdit.newsText)
         $("#sourceLink").val(postToEdit.sourceLink);
 //        $("#picture").val(postToEdit.picture);
         $("#videoLink").val(postToEdit.videoLink);

@@ -5,7 +5,8 @@
       "iron-router": {},
       "bootstrap-3": {},
       "accounts-ui-bootstrap-3": {},
-      "cron": {}
+      "cron": {},
+      "bootstrap3-wysihtml5": {}
     },
     "packages": {
       "iron-router": {
@@ -27,6 +28,11 @@
         "git": "https://github.com/alexsuslov/Meteor.cron.git",
         "tag": "v0.0.1",
         "commit": "5216d14472fee7b692e8371aadc9f35f54ba9bb0"
+      },
+      "bootstrap3-wysihtml5": {
+        "git": "https://github.com/andreioprisan/meteor-bootstrap3-wysihtml5.git",
+        "tag": "v0.3.3",
+        "commit": "251d564c3eb5b5b7a89a3e3e63f58633e0816332"
       }
     }
   }
