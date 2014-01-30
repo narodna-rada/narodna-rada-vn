@@ -16,6 +16,19 @@
 <template name="usersList">
   <div class="row">
     <h2>Зміна ролей для обраних користувачів</h2>
+ {{#if formResult}}
+ <div class="alert alert-success alert-dismissable">
+<!--   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+Ваші зміни збережено.
+</div>
+ {{/if}}
+ {{#if formError}}
+ <div class="alert alert-danger alert-dismissable">
+<!--   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+ {{formError}}
+ </div>
+ {{/if}}
+
     <table class="table table-bordered">
       <tr>
 	<td>
@@ -70,6 +83,7 @@
 	      <td><b></b></td>
 	      <td><b>E-mail</b></td>
 	      <td><b>Поточна роль</b></td>
+	      {{#if checkRole "admin"}}<td></td>{{/if}}
 	    </tr>
 	  </thead>
 	  {{#each allUsers}}
@@ -78,8 +92,11 @@
 	    <td>
 	      <input type="checkbox" value="{{_id}}" name="users">
 	    </td>
-	    <td>{{emails.0.address}}</td>
+	    <td>{{profile.name}} &nbsp; {{emails.0.address}} {{services.facebook.email}} {{services.google.email}} {{services.twitter.email}}</td>
 	    <td>{{roleUrk role}}</td>
+	    {{#if checkRole "admin"}}
+	    <td><a class="btn btn-danger delete" id="{{_id}}" role="button"><span class="glyphicon glyphicon-trash"></span></a></td>
+	    {{/if}}
 	  </tr>
 	  {{/if}}
 	  {{/each}}

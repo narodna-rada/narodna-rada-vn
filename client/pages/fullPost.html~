@@ -1,15 +1,17 @@
 <template name="fullPost">
   {{> header}}
   <div class="page-header">
-    <h1>{{header}}</h1>
+    <h1>{{header}}{{> buttonsEditDelete}}</h1>
   </div>
   <div class="col-lg-9">
     <div class="row"><i>{{date}}</i></div>
     <div class="row"><br><b>{{annotation}}</b></div>
-    <div class="row"><br>{{newsText}}</div>
+    <div class="row"><br>{{{newsText}}}</div>
+{{#if hasVideo}}
+    <div class="row"><br><a href="{{videLink}}" target="_blank">Відео до статті</a></div>
+{{/if}}
     <div class="row"><br><a href="{{sourceLink}}" target="_blank">Джерело</a></div>
     <div class="row">{{picture}}</div>
-    <div class="row">{{videoLink}}</div>
   </div>
   {{> rightColumn}}
   {{> bottomRow}}

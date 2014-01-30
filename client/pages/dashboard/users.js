@@ -1,5 +1,5 @@
 Template.usersList.allUsers = function () {
-    return Meteor.users.find({_id:{$exists:true}},{fields:{_id:1,emails:1,'services.facebook.email':1, role:1, permissions:1}}).fetch();
+    return Meteor.users.find({_id:{$exists:true}},{fields:{_id:1,emails:1,'services.facebook.email':1, 'services.google.email':1, 'services.twitter.email':1, role:1, permissions:1}}).fetch();
 }; 
 
 Template.usersList.equals = function (a,b) {
@@ -29,12 +29,14 @@ Template.usersList.events({
 	if (Meteor.user().role==='admin') {
 	    Meteor.call('updateUsersRoles',checkedUsers,newRole,function(error,result){
 		if (!error) {
-                    //show success result
-		    return true;
-		}
+		    //show success result
+		    Session.set("changeSaved", true);
+		    Session.set("saveError", null);
+		    }
 		else {
-                    //show error status
-		    return false;
+		    //show error status
+		    Session.set("changeSaved", null);
+		    Session.set("saveError",error.message);
 		};
  	    }); 
 	}
@@ -43,15 +45,21 @@ Template.usersList.events({
 		Meteor.call('updateUsersRoles',checkedUsers,newRole,function(error,result){
 		    if (!error) {
 			//show success result
-			return true;
+			Session.set("changeSaved", true);
+			Session.set("saveError", null);
 		    }
 		    else {
 			//show error status
-			return false;
+			Session.set("changeSaved", null);
+			Session.set("saveError",error.message);
 		    };
 		}); 
 	    };
 	};
+    },
+
+    'click .delete': function (event, template) {
+        if (Meteor.user().role==='admin') Meteor.call('deleteUser',event.currentTarget.id,function(){});
     }
 });
 
@@ -61,3 +69,17 @@ Template.usersList.roleUrk = function (role) {
     if (role==='superEditor') return 'Редактор';
     if (role==='admin') return 'Адміністратор';
 };
+
+Template.usersList.formError = function (){
+    return Session.get("saveError");
+};
+
+Template.usersList.formResult = function (){
+    return Session.get("changeSaved");
+};
+
+Template.usersList.destroyed = function () {
+    Session.set("changeSaved", null);
+    Session.set("saveError",null);
+};
+

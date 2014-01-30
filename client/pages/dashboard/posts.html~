@@ -18,24 +18,48 @@
 </template>
 
 <template name="postsList">
+ {{#if formResult}}
+ <div class="alert alert-success alert-dismissable">
+<!--   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+   \u0414\u044F\u043A\u0443\u0454\u043C\u043E! \u0412\u0430\u0448 \u043B\u0438\u0441\u0442 \u0432\u0456\u0434\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E.
+ </div>
+ {{/if}}
+ {{#if formError}}
+ <div class="alert alert-danger alert-dismissable">
+<!--   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+ {{formError}}
+ </div>
+ {{/if}}
+  
+
 <div class="row">
 <form role="form">
-  <div class="form-group">
-    <label for="category">Категорія</label>
-    <select class="form-control" id="category">
-      <option value="news-vinnytsya">Новини - Вінниця</option>
-      <option value="news-ukraine">Новини - Україна та світ</option>
-      <option value="narodnaRada">Народна Рада</option>
-      <option value="dopomoga-volunteers">Допомога - волонтери</option>
-      <option value="dopomoga-food">Допомога - кухня</option>
-      <option value="dopomoga-drugs">Допомога - медпункт</option>
-      <option value="dopomoga-clothes">Допомога - одяг</option>
-      <option value="dopomoga-tech">Допомога - побут</option>
-      <option value="dopomoga-payForPhone">Допомога - поповнення телефоні</option>
-      <option value="dopomoga-money">Допомога - фінанси</option>
-      <option value="dopomoga-overInternet">Допомога - через Інтернет</option>
-      <option value="dopomoga-survivals">Допомога - постраждалим</option>
-    </select>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group">
+	<label for="category">Категорія</label>
+	<select class="form-control" id="category">
+	  <option value="newsVinnytsya">Новини - Вінниця</option>
+	  <option value="newsUkraine">Новини - Україна та світ</option>
+	  <option value="narodnaRada">Народна Рада</option>
+	  <option value="dopomogaVolunteers">Допомога - волонтери</option>
+	  <option value="dopomogaFood">Допомога - кухня</option>
+	  <option value="dopomogaDrugs">Допомога - медпункт</option>
+	  <option value="dopomogaClothes">Допомога - одяг</option>
+	  <option value="dopomogaTech">Допомога - побут</option>
+	  <option value="dopomogaPayForPhone">Допомога - поповнення телефоні</option>
+	  <option value="dopomogaMoney">Допомога - фінанси</option>
+	  <option value="dopomogaOverInternet">Допомога - через Інтернет</option>
+	  <option value="dopomogaSurvivals">Допомога - постраждалим</option>
+	</select>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group">
+	<label for="date">Date</label>
+	<input type="text" class="form-control" id="date" placeholder="{{postDate}}">
+      </div>
+    </div>
   </div>
   <div class="form-group">
     <label for="header">Заголовок</label>
@@ -50,33 +74,76 @@
     <textarea class="form-control" rows="4" id="newsText"></textarea>
   </div>
   <div class="form-group">
-    <label for="sourceLink">source link</label>
-    <input type="url" class="form-control" id="sourceLink" placeholder="source link">
+    <label for="sourceLink">Посилання на джерело</label>
+    <input type="url" class="form-control" id="sourceLink" placeholder="Посилання на джерело">
   </div>
-  <div class="form-group">
-    <label for="picture">Завантажити фото</label>
-    <input type="file" id="picture">
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="form-group">
+	<label for="picture">Завантажити фото</label>
+	<input type="file" id="picture">
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <div class="form-group">
+	<label for="videoLink">Посилання на відео</label>
+	<input type="url" class="form-control" id="videoLink" placeholder="Посилання на youtube, ustream, VK">
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="videoLink">Посилання на відео</label>
-    <input type="url" class="form-control" id="videoLink" placeholder="Посилання на youtube, ustream, VK">
-  </div>
+  <button type="submit" class="btn btn-danger clean">CLEAN</button>&nbsp;&nbsp;
   <button type="submit" class="btn btn-success save">ЗБЕРІГТИ</button>
 </form>
 </div>
+<br>
 <div class="row">
  {{#each allPosts}}
   <div class="col-lg-4">
     <div class="panel panel-default">
+      <div class="panel-heading">
+	{{postCategory category}}
+      </div>
       <div class="panel-body">
-	<h2>{{header}}</h2>
-	<p>{{annotation}}</p>
-	<p align="right">
-	  <a class="btn btn-default" href="{{directLinkToPost}}" role="button">Читати повністю</a>
-	</p>
+	{{> postSmallPanel}}
       </div>
     </div>
   </div>
   {{/each}}
 </div>
+</template>
+
+<template name="postSmallPanel">
+	<h3>{{header}}</h3>
+	<p>{{annotation}}</p>
+	<div class="row">
+	  <div class="col-lg-3">
+	    <i>{{date}}</i>
+	  </div>
+	  <div class="col-lg-9">
+	    <p align="right">
+	      <a class="btn btn-default" href="{{directLinkToPost _id}}" role="button">Читати повністю</a>{{> buttonsEditDelete}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	    </p>
+	  </div>
+	</div>
+</template>
+
+<template name="buttonsEditDelete">
+{{#if currentUser}}  
+{{#if checkRole "editor"}}
+{{#if textOwner _id}}
+  &nbsp;<a class="btn btn-success edit" id="{{_id}}" role="button"><span class="glyphicon glyphicon-pencil"></span></a>
+{{/if}}
+{{else}}
+{{#if checkRole "superEditor"}}
+  &nbsp;<a class="btn btn-success edit" id="{{_id}}" role="button"><span class="glyphicon glyphicon-pencil"></span></a>
+{{else}}
+{{#if checkRole "admin"}}
+  &nbsp;<a class="btn btn-success edit" id="{{_id}}" role="button"><span class="glyphicon glyphicon-pencil"></span></a>
+{{/if}}
+{{/if}}
+{{/if}}
+{{#if checkRole "admin"}}
+  &nbsp;<a class="btn btn-danger delete" id="{{_id}}" role="button"><span class="glyphicon glyphicon-trash"></span></a> 
+{{/if}}
+{{/if}}
 </template>

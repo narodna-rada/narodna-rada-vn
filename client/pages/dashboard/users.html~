@@ -15,14 +15,27 @@
 
 <template name="usersList">
   <div class="row">
-    <h2>Change roles for selected users</h2>
+    <h2>Зміна ролей для обраних користувачів</h2>
+ {{#if formResult}}
+ <div class="alert alert-success alert-dismissable">
+<!--   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+\u0412\u0430\u0448\u0456 \u0437\u043C\u0456\u043D\u0438 \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043D\u043E.
+</div>
+ {{/if}}
+ {{#if formError}}
+ <div class="alert alert-danger alert-dismissable">
+<!--   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+ {{formError}}
+ </div>
+ {{/if}}
+
     <table class="table table-bordered">
       <tr>
 	<td>
 	  <div class="radio">
 	    <label>
 	      <input type="radio" name="roleRadios" id="optionsRadios1" value="user">
-	      User
+	      <b>Користувач</b> - початкова реєстрація
 	    </label>
 	  </div>
 	</td>
@@ -31,7 +44,7 @@
 	  <div class="radio">
 	    <label>
 	      <input type="radio" name="roleRadios" id="optionsRadios2" value="editor">
-	      Editor
+	      <b>Кореспондент</b> - додавання текстів, редагування власних текстів
 	    </label>
 	  </div>
 	</td>
@@ -40,7 +53,7 @@
 	  <div class="radio">
 	    <label>
 	      <input type="radio" name="roleRadios" id="optionsRadios3" value="superEditor">
-	      Super Editor
+	      <b>Редактор</b> - додавання текстів, редагування всіх текстів, призначення та звільнення кореспондентів
 	    </label>
 	  </div>
 	</td>
@@ -49,13 +62,13 @@
 	  <div class="radio">
 	    <label>
 	      <input type="radio" name="roleRadios" id="optionsRadios4" value="admin">
-	      Admin
+	      <b>Адміністратор</b> - додавання і видалення текстів, редагування всіх текстів, призначення та звілення кореспондентів/редакторів/адміністраторів
 	    </label>
 	  </div>
 	</td>
 {{/if}}
 	<td>
-	  <button class="btn btn-danger save" type="button">SAVE</button>
+	  <button class="btn btn-danger save" type="button">ЗБЕРІГТИ</button>
 	</td>
 	
       </tr>
@@ -69,7 +82,7 @@
 	    <tr>
 	      <td><b></b></td>
 	      <td><b>E-mail</b></td>
-	      <td><b>Role selection</b></td>
+	      <td><b>Поточна роль</b></td>
 	    </tr>
 	  </thead>
 	  {{#each allUsers}}
@@ -78,8 +91,8 @@
 	    <td>
 	      <input type="checkbox" value="{{_id}}" name="users">
 	    </td>
-	    <td>{{emails.0.address}}</td>
-	    <td>{{role}}</td>
+	    <td>{{profile.name}} &nbsp; {{emails.0.address}} {{services.facebook.email}} {{services.google.email}} {{services.twitter.email}}</td>
+	    <td>{{roleUrk role}}</td>
 	  </tr>
 	  {{/if}}
 	  {{/each}}

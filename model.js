@@ -278,7 +278,17 @@ Meteor.methods({
     updateUsersRoles: function (checkedUsers,newRole) {
         Meteor.users.update({_id:{$in:checkedUsers}},{$set:{role:newRole}},{multi:true});
     },
+
+    deleteUser: function (uid) {
+	if (Meteor.user().role==='admin') Meteor.users.remove({_id:uid});
  
+    }, 
+
+    deletePost: function (pid) {
+	if (Meteor.user().role==='admin') Posts.remove({_id:pid});
+ 
+    }, 
+
     createPost: function (options) {
 
         if (! this.userId)
@@ -287,6 +297,7 @@ Meteor.methods({
 	check(options, {
 	    pid:Match.Optional(String),
             category: NonEmptyString,
+            date: NonEmptyString,
             header: NonEmptyString,
             annotation: NonEmptyString,
             newsText: NonEmptyString,
@@ -295,21 +306,6 @@ Meteor.methods({
 	    videoLink:Match.Optional(String)
 	});
 
-	myDate=(new Date()).toString().split(' ').splice(1,3);
-	if (myDate[0]==='Jan') myDate[0]='Січень';
-	if (myDate[0]==='Feb') myDate[0]='Лютий';
-	if (myDate[0]==='Mar') myDate[0]='Березень';
-	if (myDate[0]==='Apr') myDate[0]='Квітень';
-	if (myDate[0]==='May') myDate[0]='Травень';
-	if (myDate[0]==='Jun') myDate[0]='Червень';
-	if (myDate[0]==='Jul') myDate[0]='Липень';
-	if (myDate[0]==='Aug') myDate[0]='Серпень';
-	if (myDate[0]==='Sep') myDate[0]='Вересень';
-	if (myDate[0]==='Oct') myDate[0]='Жовтень';
-	if (myDate[0]==='Nov') myDate[0]='Листопад';
-	if (myDate[0]==='Dec') myDate[0]='Грудень';
-
-	options.date=myDate.join(' ');
 	options.owner=this.userId;
 	options.status='active';
 
