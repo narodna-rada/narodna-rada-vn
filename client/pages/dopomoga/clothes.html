@@ -1,11 +1,15 @@
 <template name="clothes">
   {{> header}}
   <div class="page-header">
-    <h1>Потреби в одязі на 27 січня 2014</h1>
+    <h1>Потреби в одязі</h1>
   </div>
   <div class="col-lg-9">
-	<p>---</p>
-  </div>
+                {{#each getCategoryPosts "dopomogaClothes"}}
+                <div class="row">
+                  {{> postSmallPanel}}
+                </div>
+                {{/each}}
+   </div>
   {{> rightColumn}}
   {{> bottomRow}}
 </template>

@@ -19,6 +19,64 @@
 
 <template name="postsList">
 <div class="row">
-	list posts
+<form role="form">
+  <div class="form-group">
+    <label for="category">Категорія</label>
+    <select class="form-control" id="category">
+      <option value="news-vinnytsya">Новини - Вінниця</option>
+      <option value="news-ukraine">Новини - Україна та світ</option>
+      <option value="narodnaRada">Народна Рада</option>
+      <option value="dopomoga-volunteers">Допомога - волонтери</option>
+      <option value="dopomoga-food">Допомога - кухня</option>
+      <option value="dopomoga-drugs">Допомога - медпункт</option>
+      <option value="dopomoga-clothes">Допомога - одяг</option>
+      <option value="dopomoga-tech">Допомога - побут</option>
+      <option value="dopomoga-payForPhone">Допомога - поповнення телефоні</option>
+      <option value="dopomoga-money">Допомога - фінанси</option>
+      <option value="dopomoga-overInternet">Допомога - через Інтернет</option>
+      <option value="dopomoga-survivals">Допомога - постраждалим</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="header">Заголовок</label>
+    <input type="text" class="form-control" id="header" placeholder="Текст заголовку">
+  </div>
+  <div class="form-group">
+    <label for="annotation">Аннотація</label>
+    <textarea class="form-control" rows="2" id="annotation"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="newsText">Текст</label>
+    <textarea class="form-control" rows="4" id="newsText"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="sourceLink">source link</label>
+    <input type="url" class="form-control" id="sourceLink" placeholder="source link">
+  </div>
+  <div class="form-group">
+    <label for="picture">Завантажити фото</label>
+    <input type="file" id="picture">
+  </div>
+  <div class="form-group">
+    <label for="videoLink">Посилання на відео</label>
+    <input type="url" class="form-control" id="videoLink" placeholder="Посилання на youtube, ustream, VK">
+  </div>
+  <button type="submit" class="btn btn-success save">ЗБЕРІГТИ</button>
+</form>
+</div>
+<div class="row">
+ {{#each allPosts}}
+  <div class="col-lg-4">
+    <div class="panel panel-default">
+      <div class="panel-body">
+	<h2>{{header}}</h2>
+	<p>{{annotation}}</p>
+	<p align="right">
+	  <a class="btn btn-default" href="{{directLinkToPost}}" role="button">Читати повністю</a>
+	</p>
+      </div>
+    </div>
+  </div>
+  {{/each}}
 </div>
 </template>

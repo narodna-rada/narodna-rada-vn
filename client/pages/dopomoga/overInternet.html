@@ -11,6 +11,14 @@
 <li></li>
 <li></li>
 <li></li>
+
+                {{#each getCategoryPosts "dopomogaOverInternet"}}
+                <div class="row">
+                  {{> postSmallPanel}}
+                </div>
+                {{/each}}
+ 
+
   </div>
   {{> rightColumn}}
   {{> bottomRow}}

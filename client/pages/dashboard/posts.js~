@@ -1,0 +1,91 @@
+Template.postsList.events({
+    'click .save':function(event,template){
+	event.preventDefault();
+	options={};
+	options.category=template.find('#category').value;
+	options.header=template.find('#header').value;
+	options.annotation=template.find('#annotation').value;
+	options.newsText=template.find('#newsText').value;
+	options.sourceLink=template.find('#sourceLink').value;
+	options.picture=template.find('#picture').value;
+	options.videoLink=template.find('#videoLink').value;
+
+	Meteor.call('createPost',options, function (error, result){
+	    if (!error) {
+		//show success result
+
+		//reset form
+		template.find('#category').value="";
+		template.find('#header').value="";
+		template.find('#annotation').value="";
+		template.find('#newsText').value="";
+		template.find('#sourceLink').value="";
+		template.find('#picture').value="";
+		template.find('#videoLink').value="";
+	    }
+	    else {
+		//show error status
+	    };
+	});
+    }
+});
+
+Template.postsList.allPosts = function (){
+    if ((Meteor.user().role==='admin') || (Meteor.user().role==='superEditor'))
+	return Posts.find().fetch();
+    if (Meteor.user().role==='editor')
+	return Posts.find({owner:Meteor.userId()}).fetch();
+};
+
+categories = {
+    newsVinnytsya: "Новини - Вінниця",
+    newsUkraine: "Новини - Україна та світ",
+    narodnaRada: "Народна Рада",
+    dopomogaVolunteers:"Допомога - волонтери",
+    dopomogaFood:"Допомога - кухня",
+    dopomogaDrugs:"Допомога - медпункт",
+    dopomogaClothes:"Допомога - одяг",
+    dopomogaTech:"Допомога - побут",
+    dopomogaPayForPhone:"Допомога - поповнення телефоні",
+    dopomogaMoney:"Допомога - фінанси",
+    dopomogaOverInternet:"Допомога - через Інтернет",
+    dopomogaSurvivals:"Допомога - постраждалим"
+
+};
+
+Template.postsList.postCategory = function (category) {
+    return categories[category];
+};
+
+Handlebars.registerHelper("getCategoryPosts", function (categoryCurrent) {
+    return Posts.find({category:categoryCurrent}).fetch();
+});
+
+Handlebars.registerHelper("get10CategoryPosts", function (categoryCurrent) {
+    return Posts.find({category:categoryCurrent},{limit:10}).fetch();
+});
+
+categoryLinks = {
+    newsVinnytsya: "/news/vinNews/",
+    newsUkraine: "/news/ukrNews/",
+    narodnaRada: "/narodna-rada/",
+    dopomogaVolunteers:"/dopomoga/volunteers/",
+    dopomogaFood:"/dopomoga/food/",
+    dopomogaDrugs:"/dopomoga/drugs/",
+    dopomogaClothes:"/dopomoga/clothes/",
+    dopomogaTech:"/dopomoga/tech/",
+    dopomogaPayForPhone:"/dopomoga/payForPhone/",
+    dopomogaMoney:"/dopomoga/money/",
+    dopomogaOverInternet:"/dopomoga/overInternet/",
+    dopomogaSurvivals:"/dopomoga/survivals/"
+
+};
+
+
+Template.postSmallPanel.directLinkToPost = function (postId) {
+    linkToPost=categoryLinks[this.category]+postId;
+
+    console.log(linkToPost);
+    
+    return linkToPost;
+};

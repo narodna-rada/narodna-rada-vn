@@ -5,6 +5,13 @@
   </div>
   <div class="col-lg-9">
 	<p>Є потреба у ваучерах поповнення рахунків KyivStar, MTC, Life:) або можна поповнювати наступні номери з яких кошті будут розподілені далі.</p>
+
+                {{#each getCategoryPosts "dopomogaPayForPhone"}}
+                <div class="row">
+                  {{> postSmallPanel}}
+                </div>
+                {{/each}}
+ 
   </div>
   {{> rightColumn}}
   {{> bottomRow}}

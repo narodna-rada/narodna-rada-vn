@@ -1,7 +1,6 @@
 <template name="usersEdit">
 {{> header}}
 {{> dashboardMenu}}
-{{#if currentUser}}
 	{{#if checkRole "admin"}}
 		{{> usersList}}
 	{{else}}
@@ -12,9 +11,6 @@
 			<br>Отже, якщо ви не бачите посиланнь на такі можливості - зверніться через "Зв’язок" до адміністратора 			сайта с проханням надати вам відповідний рівень доступу.
 		{{/if}}
 	{{/if}}
-{{else}}
-  {{gotohome}}
-{{/if}}
 </template>
 
 <template name="usersList">
@@ -39,7 +35,7 @@
 	    </label>
 	  </div>
 	</td>
-	
+{{#if adminRole}}	
 	<td>
 	  <div class="radio">
 	    <label>
@@ -57,7 +53,7 @@
 	    </label>
 	  </div>
 	</td>
-
+{{/if}}
 	<td>
 	  <button class="btn btn-danger save" type="button">SAVE</button>
 	</td>
@@ -77,6 +73,7 @@
 	    </tr>
 	  </thead>
 	  {{#each allUsers}}
+	  {{#if showToAdmin role}}
   	  <tr>
 	    <td>
 	      <input type="checkbox" value="{{_id}}" name="users">
@@ -84,6 +81,7 @@
 	    <td>{{emails.0.address}}</td>
 	    <td>{{role}}</td>
 	  </tr>
+	  {{/if}}
 	  {{/each}}
 	</table>
       </div>

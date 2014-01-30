@@ -1,12 +1,15 @@
-<template name="volunteers">
+<template name="clothes">
   {{> header}}
   <div class="page-header">
-    <h1>Стати волонтером</h1>
+    <h1>Потреби в одязі на 27 січня 2014</h1>
   </div>
   <div class="col-lg-9">
-	<p>УВАГА! Вінничани, революційна комендатура Вінницької ОДА для забезпечення потреб охоронців порядку потребує:
-ВОЛОНТЕРИ В ОХОРОНУ, НА КУХНЮ, В МЕДПУНКТ!</p>
-  </div>
+                {{#each getCategoryPosts "dopomogaClothes"}}
+                <div class="row">
+                  {{> postSmallPanel}}
+                </div>
+                {{/each}}
+   </div>
   {{> rightColumn}}
   {{> bottomRow}}
 </template>

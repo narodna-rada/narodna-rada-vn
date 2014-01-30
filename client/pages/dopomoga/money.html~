@@ -1,11 +1,17 @@
-<template name="volunteers">
+<template name="money">
   {{> header}}
   <div class="page-header">
-    <h1>Стати волонтером</h1>
+    <h1>Реквізити для фінансової допомоги</h1>
   </div>
   <div class="col-lg-9">
-	<p>УВАГА! Вінничани, революційна комендатура Вінницької ОДА для забезпечення потреб охоронців порядку потребує:
-ВОЛОНТЕРИ В ОХОРОНУ, НА КУХНЮ, В МЕДПУНКТ!</p>
+	<p>реквізити рахунків, карток та інше</p>
+
+                {{#each getCategoryPosts "dopomogaMoney"}}
+                <div class="row">
+                  {{> postSmallPanel}}
+                </div>
+                {{/each}}
+ 
   </div>
   {{> rightColumn}}
   {{> bottomRow}}

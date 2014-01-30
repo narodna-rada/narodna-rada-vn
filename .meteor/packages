@@ -5,9 +5,6 @@
 
 standard-app-packages
 preserve-inputs
-accounts-facebook
-accounts-google
-accounts-twitter
 email
 http
 iron-router
@@ -16,3 +13,6 @@ accounts-ui-bootstrap-3
 cron
 spiderable
 accounts-password
+accounts-facebook
+accounts-twitter
+accounts-google

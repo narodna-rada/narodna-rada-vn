@@ -15,6 +15,12 @@
 </br>
 </br>
 </br>
+                {{#each getCategoryPosts "dopomogaSurvivals"}}
+                <div class="row">
+                  {{> postSmallPanel}}
+                </div>
+                {{/each}}
+ 
   </div>
   {{> rightColumn}}
   {{> bottomRow}}

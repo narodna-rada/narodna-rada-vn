@@ -11,6 +11,12 @@
 	<div class="panel-body">
 		{{> vinNews2a}}
 		{{> vinNews1a}}
+		{{#each get10CategoryPosts "newsVinnytsya"}}
+		{{> postSmallPanel}}
+		{{/each}}
+		<p align="right">
+		  <a class="btn btn-info" href="/news/vinNews/" role="button">Всі новини Вінниці</a>
+		</p> 
 	</div>
       </div>
    </div>
@@ -18,11 +24,17 @@
    <div class="col-lg-4">
       <div class="panel panel-default">
 	<div class="panel-heading">
-          <h3 class="panel-title">Новини України</h3>
+          <h3 class="panel-title"><b>Новини України та світу</b></h3>
 	</div>
 	<div class="panel-body">
 		{{> ukrNews2a}}
 		{{> ukrNews1a}}
+		{{#each get10CategoryPosts "newsUkraine"}}
+		{{> postSmallPanel}}
+		{{/each}}
+		<p align="right">
+		  <a class="btn btn-info" href="/news/urkNews/" role="button">Всі новини України та світу</a>
+		</p> 
 	</div>
       </div>
    </div>

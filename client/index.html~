@@ -2,7 +2,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Participate in social exchange network - reach biger audience with your posts.">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico">
 
     <title>Вінницький майдан - офіційна сторінка майдану у місті Вінниці та Вінницькій області.</title>
 
@@ -127,7 +127,7 @@ code {
             </ul>
 	    <ul class="nav navbar-nav navbar-right">
 	        {{#if currentUser}}
-		<li class="{{activeRouteClass 'dashboard'}}"><a href="/dashboard">Зона дій</a></li>		
+		<li class="{{activeRouteClass 'dashboard'}}"><a href="/dashboard">Приватний кабінет</a></li>		
 		{{/if}}
                 {{ loginButtons }}
 	    </ul>

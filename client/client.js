@@ -21,14 +21,13 @@ Template.header.helpers({
         var args = Array.prototype.slice.call(arguments, 0);
         args.pop();
         var active = _.any(args, function(name) {
-            return location.pathname === Router.path(name);
+	    if ((location.pathname==='/') && (name==='home')) {
+		return true;
+	    }
+	    else if (name!='home') {
+		return ~location.pathname.indexOf(Router.path(name));
+	    };
         });
         return active && 'active';
     }
 });
-
-/*
-Meteor.logout(function(){
-    return Router.go('/');
-});
-*/

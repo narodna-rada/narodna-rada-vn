@@ -4,9 +4,12 @@
     <h1>Новини України</h1>
   </div>
   <div class="col-lg-9">
-	{{> ukrNews2f}}</br>
-	{{> ukrNews1f}}</br></br>
-  </div>
+                {{#each getCategoryPosts "newsUkraine"}}
+                <div class="row">
+                  {{> postSmallPanel}}
+                </div>
+                {{/each}}
+   </div>
   {{> rightColumn}}
   {{> bottomRow}}
 </template>
