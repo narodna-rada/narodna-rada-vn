@@ -1,11 +1,17 @@
-<template name="volunteers">
+<template name="payForPhone">
   {{> header}}
   <div class="page-header">
-    <h1>Стати волонтером</h1>
+    <h1>Допомогти підтримувати зв’язок</h1>
   </div>
   <div class="col-lg-9">
-	<p>УВАГА! Вінничани, революційна комендатура Вінницької ОДА для забезпечення потреб охоронців порядку потребує:
-ВОЛОНТЕРИ В ОХОРОНУ, НА КУХНЮ, В МЕДПУНКТ!</p>
+	<p>Є потреба у ваучерах поповнення рахунків KyivStar, MTC, Life:) або можна поповнювати наступні номери з яких кошті будут розподілені далі.</p>
+
+                {{#each getCategoryPosts "dopomogaPayForPhone"}}
+                <div class="row">
+                  {{> postSmallPanel}}
+                </div>
+                {{/each}}
+ 
   </div>
   {{> rightColumn}}
   {{> bottomRow}}

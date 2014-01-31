@@ -12,6 +12,15 @@
 Кошти ви можете пережати на рахунок постраждавшого:
 картка Приватбанку № 4149437414081891 Зінченко Володимир Борисович</p>
 <img src="/zinchenko.jpg" alt="Зінченко Володимир Борисович" class="img-rounded">
+</br>
+</br>
+</br>
+                {{#each getCategoryPosts "dopomogaSurvivals"}}
+                <div class="row">
+                  {{> postSmallPanel}}
+                </div>
+                {{/each}}
+ 
   </div>
   {{> rightColumn}}
   {{> bottomRow}}

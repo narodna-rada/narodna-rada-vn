@@ -1,7 +1,7 @@
 <template name="money">
   {{> header}}
   <div class="page-header">
-    <h1>Реквізити для фінансової допомоги</h1>
+    <h1>Допомогти грошима</h1>
   </div>
   <div class="col-lg-9">
 	<p>реквізити рахунків, карток та інше</p>

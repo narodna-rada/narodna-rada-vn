@@ -83,7 +83,7 @@ Template.postsList.allPosts = function (){
     if ((Meteor.user().role==='admin') || (Meteor.user().role==='superEditor'))
 	return Posts.find().fetch();
     if (Meteor.user().role==='editor')
-	return Posts.find({owner:Meteor.userId()}).fetch();
+	return Posts.find({owner:Meteor.userId()},{sort: {date:-1}}).fetch();
 };
 
 categories = {
@@ -107,11 +107,11 @@ Template.postsList.postCategory = function (category) {
 };
 
 Handlebars.registerHelper("getCategoryPosts", function (categoryCurrent) {
-    return Posts.find({category:categoryCurrent}).fetch();
+    return Posts.find({category:categoryCurrent},{sort: {date:-1}}).fetch();
 });
 
 Handlebars.registerHelper("get10CategoryPosts", function (categoryCurrent) {
-    return Posts.find({category:categoryCurrent},{limit:10}).fetch();
+    return Posts.find({category:categoryCurrent},{sort: {date:-1}},{limit:10}).fetch();
 });
 
 categoryLinks = {
@@ -199,4 +199,8 @@ Template.fullPost.hasVideo = function () {
 
 Template.fullPost.hasPic = function () {
     if (this.picture) return true;
+};
+
+Template.fullPost.hasSource = function () {
+    if (this.sourceLink) return true;
 };
