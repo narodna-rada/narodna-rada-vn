@@ -15,6 +15,10 @@ Router.map (function ()
 	path : '/narodna-rada'
     });
 
+    this.route('lustratio',{
+	path : '/lustratio'
+    });
+
     this.route('contact',{
 	before: function (){
 	    Session.set('messageSent', null);

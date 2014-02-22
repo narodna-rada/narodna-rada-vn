@@ -1,0 +1,15 @@
+<template name="lustratio">
+{{> header}}
+  <div class="page-header">
+    <h1>Люстраційний Лист Вінниці</h1>
+  </div>
+  <div class="col-lg-9">
+    {{#each getCategoryPosts "lustratio"}}
+    <div class="row">
+      {{> postSmallPanel}}
+    </div>
+    {{/each}}
+  </div>
+{{> rightColumn}}
+{{> bottomRow}}
+</template>

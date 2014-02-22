@@ -87,9 +87,10 @@ Template.postsList.allPosts = function (){
 };
 
 categories = {
-    newsVinnytsya: "Новини - Вінниця",
-    newsUkraine: "Новини - Україна та світ",
+//    newsVinnytsya: "Новини - Вінниця",
+//    newsUkraine: "Новини - Україна та світ",
     narodnaRada: "Народна Рада",
+    lustratio: "Лист люстрації",
     dopomogaVolunteers:"Допомога - волонтери",
     dopomogaFood:"Допомога - кухня",
     dopomogaDrugs:"Допомога - медпункт",
@@ -118,6 +119,7 @@ categoryLinks = {
     newsVinnytsya: "/news/vinNews/",
     newsUkraine: "/news/ukrNews/",
     narodnaRada: "/narodna-rada/",
+    lustratio: "/lustratio/",
     dopomogaVolunteers:"/dopomoga/volunteers/",
     dopomogaFood:"/dopomoga/food/",
     dopomogaDrugs:"/dopomoga/drugs/",

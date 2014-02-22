@@ -2,14 +2,12 @@
 
    <div class="col-lg-3">
 
-     <div class="row">
       <div class="panel panel-default">
 	<div class="panel-heading">
-          <h3 class="panel-title">Як допомогти</h3>
+          <h3 class="panel-title"><b>Як допомогти</b></h3>
 	</div>
 	<div class="panel-body">
-          <div class="row">
-	    <div class="container">
+		<ul>
                     <li><a href="/dopomoga/volunteers">Стань волонтером</a></li>
                     <li><a href="/dopomoga/food">Їжею</a></li>
                     <li><a href="/dopomoga/drugs">Ліками</a></li>
@@ -19,33 +17,28 @@
                     <li><a href="/dopomoga/money">Грошима</a></li>
                     <li><a href="/dopomoga/overInternet">Через Інтернет</a></li>
                     <li><a href="/dopomoga/survivals">Допомога постраждалим</a></li>
-	    </div>
-          </div>
+		</ul>
 	</div>
       </div>
-     </div>
 
-     <div class="row">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Пресс-центр</h3>
+          <h3 class="panel-title"><b>Незалежне Інтернет-ТБ</b></h3>
         </div>
         <div class="panel-body">
-          <div class="row">
-            <div class="container">
-                ПІБ контактної особи та фото</br>
-                телефони для зв’язку</br>
-                години роботи</br>
-            </div>
-          </div>
+          <p>
+		<a href="http://hromadske.tv/" target="_blank">ГРОМАДСЬКЕ ТЕЛЕБАЧЕННЯ</a></br>
+		<a href="http://spilno.tv/" target="_blank">Спільнобачення</a></br>
+		<a href="http://www.radiosvoboda.org/" target="_blank">Радіо Свобода</a></br>
+		<a href="http://espreso.tv/" target="_blank">ЕСПРЕСО.TV</a></br>
+		<a href="http://ukrstream.tv/" target="_blank">UkrStream.TV</a></br>
+          </p>
         </div>
       </div>
-     </div>
 
-     <div class="row">
       <div class="panel panel-default">
 	<div class="panel-heading">
-          <h3 class="panel-title">Дружні ресурси</h3>
+          <h3 class="panel-title"><b>Дружні ресурси</b></h3>
 	</div>
 	<div class="panel-body">
           <div class="row">
@@ -57,13 +50,10 @@
 		  </br><b>Сторінки Фейсбук</b></br>
 			<a href="https://www.facebook.com/NarodnaRadaVinRegion" target="_blank">Народна Рада Вінницької Області</a></br>
 			<a href="https://www.facebook.com/pages/%D0%92%D1%96%D0%BD%D0%BD%D0%B8%D1%86%D1%8C%D0%BA%D0%B0-%D0%9D%D0%B0%D1%80%D0%BE%D0%B4%D0%BD%D0%B0-%D0%A0%D0%B0%D0%B4%D0%B0/728418097170864" target="_blank">Вінницька Народна Рада</a></br>
-			<a href="https://www.facebook.com/groups/VinnyckaNR/" target="_blank">Вінницька Народна Рада</a></br>
-
 		</div>
           </div>
 	</div>
       </div>
-     </div>
 
    </div>
 

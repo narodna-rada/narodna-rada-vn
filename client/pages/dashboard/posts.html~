@@ -21,8 +21,8 @@
  {{#if formResult}}
  <div class="alert alert-success alert-dismissable">
 <!--   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
-   \u0414\u044F\u043A\u0443\u0454\u043C\u043E! \u0412\u0430\u0448 \u043B\u0438\u0441\u0442 \u0432\u0456\u0434\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E.
- </div>
+Ваші зміни збережено.
+</div>
  {{/if}}
  {{#if formError}}
  <div class="alert alert-danger alert-dismissable">
