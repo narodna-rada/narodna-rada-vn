@@ -119,6 +119,7 @@ categoryLinks = {
     newsVinnytsya: "/news/vinNews/",
     newsUkraine: "/news/ukrNews/",
     narodnaRada: "/narodna-rada/",
+    lustratio: "/lustratio/",
     dopomogaVolunteers:"/dopomoga/volunteers/",
     dopomogaFood:"/dopomoga/food/",
     dopomogaDrugs:"/dopomoga/drugs/",
