@@ -41,7 +41,7 @@ Template.postsList.events({
 		template.find('#category').value="";
 		template.find('#date').value="";
 		template.find('#header').value="";
-		template.find('#annotation').value="";
+		$('#annotation').data("wysihtml5").editor.clear();
 		$('#newsText').data("wysihtml5").editor.clear();
 		template.find('#sourceLink').value="";
 		template.find('#picture').value="";
@@ -69,6 +69,7 @@ Template.postsList.events({
 	template.find('#date').value="";
 	template.find('#header').value="";
 	template.find('#annotation').value="";
+	$('#annotation').data("wysihtml5").editor.clear();
 	template.find('#newsText').value="";
 	$('#newsText').data("wysihtml5").editor.clear();
 	template.find('#sourceLink').value="";
@@ -148,7 +149,7 @@ Template.buttonsEditDelete.events({
 		$("#category").val(postToEdit.category);
 		$("#date").val(postToEdit.date);
 		$("#header").val(postToEdit.header);
-		$("#annotation").val(postToEdit.annotation);
+		$('#annotation').data("wysihtml5").editor.setValue(postToEdit.annotation);
 		$('#newsText').data("wysihtml5").editor.setValue(postToEdit.newsText);
 		$("#sourceLink").val(postToEdit.sourceLink);
 		//        $("#picture").val(postToEdit.picture);
@@ -176,7 +177,7 @@ Template.postsList.rendered = function () {
         $("#category").val(postToEdit.category);
         $("#date").val(postToEdit.date);
         $("#header").val(postToEdit.header);
-        $("#annotation").val(postToEdit.annotation);
+	$('#annotation').data("wysihtml5").editor.setValue(postToEdit.annotation)
 	$('#newsText').data("wysihtml5").editor.setValue(postToEdit.newsText)
         $("#sourceLink").val(postToEdit.sourceLink);
 //        $("#picture").val(postToEdit.picture);
@@ -207,3 +208,12 @@ Template.fullPost.hasPic = function () {
 Template.fullPost.hasSource = function () {
     if (this.sourceLink) return true;
 };
+
+var addthis_config = {"data_track_addressbar": true, "url": location.href};
+
+Template.fullPost.rendered = function () {
+	$("#addThisButtons").html('<div class="addthis_toolbox addthis_default_style "><a class="addthis_button_facebook_like" fb:like:layout="button_count"></a><a class="addthis_button_tweet"></a><a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a><a class="addthis_counter addthis_pill_style"></a></div>');
+addthis.toolbox(".addthis_toolbox");
+};
+
+
