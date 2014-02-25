@@ -15,6 +15,10 @@ Router.map (function ()
 	path : '/narodna-rada'
     });
 
+    this.route('lustratio',{
+	path : '/lustratio'
+    });
+
     this.route('contact',{
 	before: function (){
 	    Session.set('messageSent', null);
@@ -76,6 +80,138 @@ Router.map (function ()
     this.route('survivals',{
 	template : 'survivals',
 	path : '/dopomoga/survivals'
+    });
+
+    this.route('fullPost',{
+	template : 'fullPost',
+	path : '/narodna-rada/:_id',
+        data : function () {
+                var pid = decodeURIComponent(this.params._id);
+                return Posts.find({_id:pid}).fetch()[0];
+            },
+        waitOn: function (){return Meteor.subscribe('Posts');}
+ 
+    });
+
+    this.route('fullPost',{
+	template : 'fullPost',
+	path : '/news/vinNews/:_id',
+        data : function () {
+                var pid = decodeURIComponent(this.params._id);
+                return Posts.find({_id:pid}).fetch()[0];
+            },
+        waitOn: function (){return Meteor.subscribe('Posts');}
+ 
+    });
+
+    this.route('fullPost',{
+	template : 'fullPost',
+	path : '/news/ukrNews/:_id',
+        data : function () {
+                var pid = decodeURIComponent(this.params._id);
+                return Posts.find({_id:pid}).fetch()[0];
+            },
+        waitOn: function (){return Meteor.subscribe('Posts');}
+ 
+    });
+
+    this.route('fullPost',{
+	template : 'fullPost',
+	path : '/dopomoga/volunteers/:_id',
+        data : function () {
+                var pid = decodeURIComponent(this.params._id);
+                return Posts.find({_id:pid}).fetch()[0];
+            },
+        waitOn: function (){return Meteor.subscribe('Posts');}
+ 
+    });
+
+    this.route('fullPost',{
+	template : 'fullPost',
+	path : '/dopomoga/food/:_id',
+        data : function () {
+                var pid = decodeURIComponent(this.params._id);
+                return Posts.find({_id:pid}).fetch()[0];
+            },
+        waitOn: function (){return Meteor.subscribe('Posts');}
+ 
+    });
+
+    this.route('fullPost',{
+	template : 'fullPost',
+	path : '/dopomoga/drugs/:_id',
+        data : function () {
+                var pid = decodeURIComponent(this.params._id);
+                return Posts.find({_id:pid}).fetch()[0];
+            },
+        waitOn: function (){return Meteor.subscribe('Posts');}
+ 
+    });
+
+    this.route('fullPost',{
+	template : 'fullPost',
+	path : '/dopomoga/clothes/:_id',
+        data : function () {
+                var pid = decodeURIComponent(this.params._id);
+                return Posts.find({_id:pid}).fetch()[0];
+            },
+        waitOn: function (){return Meteor.subscribe('Posts');}
+ 
+    });
+
+    this.route('fullPost',{
+	template : 'fullPost',
+	path : '/dopomoga/tech/:_id',
+        data : function () {
+                var pid = decodeURIComponent(this.params._id);
+                return Posts.find({_id:pid}).fetch()[0];
+            },
+        waitOn: function (){return Meteor.subscribe('Posts');}
+ 
+    });
+
+    this.route('fullPost',{
+	template : 'fullPost',
+	path : '/dopomoga/payForPhone/:_id',
+        data : function () {
+                var pid = decodeURIComponent(this.params._id);
+                return Posts.find({_id:pid}).fetch()[0];
+            },
+        waitOn: function (){return Meteor.subscribe('Posts');}
+ 
+    });
+
+    this.route('fullPost',{
+	template : 'fullPost',
+	path : '/dopomoga/money/:_id',
+        data : function () {
+                var pid = decodeURIComponent(this.params._id);
+                return Posts.find({_id:pid}).fetch()[0];
+            },
+        waitOn: function (){return Meteor.subscribe('Posts');}
+ 
+    });
+
+    this.route('fullPost',{
+	template : 'fullPost',
+	path : '/dopomoga/overInternet/:_id',
+        data : function () {
+                var pid = decodeURIComponent(this.params._id);
+                return Posts.find({_id:pid}).fetch()[0];
+            },
+        waitOn: function (){return Meteor.subscribe('Posts');}
+ 
+    });
+
+    this.route('fullPost',{
+	template : 'fullPost',
+	path : '/dopomoga/survivals/:_id',
+        data : function () {
+                var pid = decodeURIComponent(this.params._id);
+                return Posts.find({_id:pid}).fetch()[0];
+            },
+        waitOn: function (){return Meteor.subscribe('Posts');}
+ 
     });
 
 
@@ -146,14 +282,26 @@ Meteor.methods({
     updateUsersRoles: function (checkedUsers,newRole) {
         Meteor.users.update({_id:{$in:checkedUsers}},{$set:{role:newRole}},{multi:true});
     },
+
+    deleteUser: function (uid) {
+	if (Meteor.user().role==='admin') Meteor.users.remove({_id:uid});
  
+    }, 
+
+    deletePost: function (pid) {
+	if (Meteor.user().role==='admin') Posts.remove({_id:pid});
+ 
+    }, 
+
     createPost: function (options) {
 
         if (! this.userId)
             throw new Meteor.Error(403, "You must be logged in to submit a post");
 
 	check(options, {
+	    pid:Match.Optional(String),
             category: NonEmptyString,
+            date: NonEmptyString,
             header: NonEmptyString,
             annotation: NonEmptyString,
             newsText: NonEmptyString,
@@ -162,29 +310,40 @@ Meteor.methods({
 	    videoLink:Match.Optional(String)
 	});
 
-	myDate=(new Date()).toString().split(' ').splice(1,3);
-	if (myDate[0]==='Jan') myDate[0]='January';
-
-	options.date=myDate.join(' ');
 	options.owner=this.userId;
 	options.status='active';
 
 	if (!options.picture) options.picture='';
 	if (!options.videoLink) options.videoLink='';
 	if (!options.sourceLink) options.sourceLink='';
-	
-	
-	return Posts.insert({
-            category: options.category,
-            header: options.header,
-            annotation: options.annotation,
-            newsText: options.newsText,
-            date: options.date,
-            picture: options.picture,
-            videoLink: options.videoLink,
-            sourceLink: options.sourceLink,
-            owner: options.owner,
-            status: options.status
-	});
+
+	if (options.pid) {
+	    return Posts.update(options.pid, {
+		category: options.category,
+		header: options.header,
+		annotation: options.annotation,
+		newsText: options.newsText,
+		date: options.date,
+		picture: options.picture,
+		videoLink: options.videoLink,
+		sourceLink: options.sourceLink,
+		owner: options.owner,
+		status: options.status
+	    });
+	}
+	else {
+	    return Posts.insert({
+		category: options.category,
+		header: options.header,
+		annotation: options.annotation,
+		newsText: options.newsText,
+		date: options.date,
+		picture: options.picture,
+		videoLink: options.videoLink,
+		sourceLink: options.sourceLink,
+		owner: options.owner,
+		status: options.status
+	    });
+	};
     }
 });

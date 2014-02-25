@@ -19,6 +19,19 @@ Router.map (function ()
 	path : '/lustratio'
     });
 
+    this.route('fullPost',{
+	template : 'fullPost',
+	path : '/lustratio/:_id',
+        data : function () {
+                var pid = decodeURIComponent(this.params._id);
+                return Posts.find({_id:pid}).fetch()[0];
+            },
+        waitOn: function (){return Meteor.subscribe('Posts');}
+ 
+    });
+
+
+
     this.route('contact',{
 	before: function (){
 	    Session.set('messageSent', null);
