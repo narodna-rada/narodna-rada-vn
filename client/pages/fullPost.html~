@@ -2,7 +2,7 @@
   {{> header}}
   <div class="page-header">
     <h1>{{header}}{{> buttonsEditDelete}}</h1>
-	<span id="addThisButtons"></span>
+	<p id="addThisButtons"></p>
   </div>
   <div class="col-lg-9">
     <div class="row"><i>{{date}}</i></div>

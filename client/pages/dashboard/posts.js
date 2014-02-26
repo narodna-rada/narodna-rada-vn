@@ -1,17 +1,4 @@
-myDate=(new Date()).toString().split(' ').splice(1,3);
-if (myDate[0]==='Jan') myDate[0]='Січень';
-if (myDate[0]==='Feb') myDate[0]='Лютий';
-if (myDate[0]==='Mar') myDate[0]='Березень';
-if (myDate[0]==='Apr') myDate[0]='Квітень';
-if (myDate[0]==='May') myDate[0]='Травень';
-if (myDate[0]==='Jun') myDate[0]='Червень';
-if (myDate[0]==='Jul') myDate[0]='Липень';
-if (myDate[0]==='Aug') myDate[0]='Серпень';
-if (myDate[0]==='Sep') myDate[0]='Вересень';
-if (myDate[0]==='Oct') myDate[0]='Жовтень';
-if (myDate[0]==='Nov') myDate[0]='Листопад';
-if (myDate[0]==='Dec') myDate[0]='Грудень';
-myDate=myDate.join(' ');
+myDate=moment().format("MM/DD/YYYY hh:mm A");
 
 Template.postsList.postDate = function(){
     return myDate;
@@ -109,11 +96,29 @@ Template.postsList.postCategory = function (category) {
 };
 
 Handlebars.registerHelper("getCategoryPosts", function (categoryCurrent) {
-    return Posts.find({category:categoryCurrent},{sort: {date:-1}}).fetch();
+    return Posts.find({category:categoryCurrent},{sort: {date:1}}).fetch();
 });
 
 Handlebars.registerHelper("get10CategoryPosts", function (categoryCurrent) {
-    return Posts.find({category:categoryCurrent},{sort: {date:-1}},{limit:10}).fetch();
+    return Posts.find({category:categoryCurrent},{sort: {date:1}},{limit:10}).fetch();
+});
+
+Handlebars.registerHelper("dateToUkrainian", function (date) {
+	var myDate=moment(date).format("MMM DD YYYY").split(' ');
+	if (myDate[0]==='Jan') myDate[0]='Січень';
+	if (myDate[0]==='Feb') myDate[0]='Лютий';
+	if (myDate[0]==='Mar') myDate[0]='Березень';
+	if (myDate[0]==='Apr') myDate[0]='Квітень';
+	if (myDate[0]==='May') myDate[0]='Травень';
+	if (myDate[0]==='Jun') myDate[0]='Червень';
+	if (myDate[0]==='Jul') myDate[0]='Липень';
+	if (myDate[0]==='Aug') myDate[0]='Серпень';
+	if (myDate[0]==='Sep') myDate[0]='Вересень';
+	if (myDate[0]==='Oct') myDate[0]='Жовтень';
+	if (myDate[0]==='Nov') myDate[0]='Листопад';
+	if (myDate[0]==='Dec') myDate[0]='Грудень';
+	myDate=myDate.join(' ');
+	return myDate;
 });
 
 categoryLinks = {
@@ -167,9 +172,11 @@ Template.buttonsEditDelete.events({
 });
     
 Template.postsList.rendered = function () {
+
 //    $('#newsText').wysihtml5({locale:"ua-UA"});
     $('#newsText').wysihtml5();
     $('#annotation').wysihtml5();
+    $('.datetimepicker').datetimepicker();
     $("#date").val(myDate);
 
     if (Session.get('postToEdit')) {
@@ -215,7 +222,3 @@ Template.fullPost.rendered = function () {
 	$("#addThisButtons").html('<div class="addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_share" fb:share:layout="button_count"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_button_tweet"></a><a class="addthis_counter addthis_pill_style"></a></div>');
 addthis.toolbox(".addthis_toolbox");
 };
-
-
-
-
