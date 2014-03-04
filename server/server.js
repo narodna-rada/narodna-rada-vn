@@ -10,8 +10,13 @@ Meteor.publish("Posts", function () {
   return Posts.find();
 });
 
+Meteor.publish("S3files", function () {
+  return Meteor.s3files.find();
+});
+
 Accounts.onCreateUser(function(options, user){
-    user.role='user';
+    if (!user.role) user.role='user';
+    if (!user.roles) user.roles='';
     if (options.profile)
         user.profile = options.profile;
     return user;

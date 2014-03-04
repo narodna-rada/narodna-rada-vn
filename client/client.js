@@ -31,3 +31,7 @@ Template.header.helpers({
         return active && 'active';
     }
 });
+
+Accounts.ui.config({
+  passwordSignupFields: 'USERNAME_AND_EMAIL'
+});

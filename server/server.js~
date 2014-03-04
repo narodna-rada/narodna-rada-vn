@@ -2,30 +2,21 @@ Meteor.startup(function () {
     // code to run on server at startup
 });
 
+Meteor.publish(null, function () {
+  return Meteor.users.find({},{fields:{'services.facebook.email':1,'services.google.email':1,'services.twitter.email':1, emails:1, role:1, permissions:1}});
+});
+
 Meteor.publish("Posts", function () {
   return Posts.find();
 });
 
-Meteor.publish(null, function () {
-  return Meteor.users.find({},{fields:{services:1, balance:1, profile:1}});
+Meteor.publish("S3files", function () {
+  return Meteor.s3files.find();
 });
 
-Meteor.methods({
-    // Declaring a method
-    getHtmlPage: function (url) {
-        this.unblock();
-        return Meteor.http.get(url);
-    },
-    bitlyUrl: function (url) {
-        this.unblock();
-        return Meteor.http.get("https://api-ssl.bitly.com/v3/shorten?access_token=cb190a9f1178e398d8176abefc40d7bbe92750ce&longUrl="+encodeURIComponent(url));
-    }
-});
- 
 Accounts.onCreateUser(function(options, user){
-    user.balance=3000;
+    if (!user.role) user.role='user';
     if (options.profile)
-	user.profile = options.profile;
+        user.profile = options.profile;
     return user;
 });
-

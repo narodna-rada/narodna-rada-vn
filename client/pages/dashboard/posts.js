@@ -64,6 +64,16 @@ Template.postsList.events({
 	template.find('#videoLink').value="";
         Session.set("postSaved", null);
         Session.set("saveError", null);
+    },
+
+    'click .img-upload':function(event,template){
+	event.preventDefault();
+    },
+
+    'click .savePostImage':function(event,template){
+	event.preventDefault();
+	url=template.find('input[name=imagesRadios]:checked').value;
+	$('.imgForPost').html('<img src="'+url+'" class="img-rounded" width="150"><input type="hidden" id="picture" value="'+url+'">');
     }
 });
 
@@ -72,6 +82,11 @@ Template.postsList.allPosts = function (){
 	return Posts.find().fetch();
     if (Meteor.user().role==='editor')
 	return Posts.find({owner:Meteor.userId()},{sort: {date:-1}}).fetch();
+};
+
+Template.postsList.uploadedImages = function (){
+    if ((Meteor.user().role==='admin') || (Meteor.user().role==='superEditor') || (Meteor.user().role==='editor'))
+	return S3files.find().fetch();
 };
 
 categories = {
@@ -96,11 +111,15 @@ Template.postsList.postCategory = function (category) {
 };
 
 Handlebars.registerHelper("getCategoryPosts", function (categoryCurrent) {
-    return Posts.find({category:categoryCurrent},{sort: {date:1}}).fetch();
+    return Posts.find({category:categoryCurrent},{sort: {date:-1}}).fetch();
 });
 
 Handlebars.registerHelper("get10CategoryPosts", function (categoryCurrent) {
-    return Posts.find({category:categoryCurrent},{sort: {date:1}},{limit:10}).fetch();
+    return Posts.find({category:categoryCurrent},{sort: {date:-1}},{limit:10}).fetch();
+});
+
+Handlebars.registerHelper("currentPath", function () {
+    return location.href;
 });
 
 Handlebars.registerHelper("dateToUkrainian", function (date) {
@@ -174,8 +193,8 @@ Template.buttonsEditDelete.events({
 Template.postsList.rendered = function () {
 
 //    $('#newsText').wysihtml5({locale:"ua-UA"});
-    $('#newsText').wysihtml5();
-    $('#annotation').wysihtml5();
+	$('#newsText').wysihtml5();
+    	$('#annotation').wysihtml5();
     $('.datetimepicker').datetimepicker();
     $("#date").val(myDate);
 
@@ -216,9 +235,12 @@ Template.fullPost.hasSource = function () {
     if (this.sourceLink) return true;
 };
 
-var addthis_config = {"data_track_addressbar": true, "url": location.href};
-
 Template.fullPost.rendered = function () {
-	$("#addThisButtons").html('<div class="addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_share" fb:share:layout="button_count"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_button_tweet"></a><a class="addthis_counter addthis_pill_style"></a></div>');
-addthis.toolbox(".addthis_toolbox");
+
+	$(".VKlike").html('<div id="vk_like"></div><script type="text/javascript">VK.Widgets.Like("vk_like", {type: "button"});</script>');
+	$(".GPlusLike").html('<script type="text/javascript">  window.___gcfg = {lang: "uk"};  (function() {    var po = document.createElement("script"); po.type = "text/javascript"; po.async = true; po.src = "https://apis.google.com/js/platform.js";     var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s);   })(); </script>');
+	$(".twitterButton").html('<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "twitter-wjs");</script>');
+
 };
+
+

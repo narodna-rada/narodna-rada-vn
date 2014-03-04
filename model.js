@@ -30,8 +30,6 @@ Router.map (function ()
  
     });
 
-
-
     this.route('contact',{
 	before: function (){
 	    Session.set('messageSent', null);
@@ -240,6 +238,11 @@ Router.map (function ()
 	path : '/dashboard/postsEdit'
     });
 
+    this.route('imagesEdit',{
+	template : 'imagesEdit',
+	path : '/dashboard/imagesEdit'
+    });
+
 
     this.route('notFound', { path: '*' });
 });
@@ -293,7 +296,11 @@ Meteor.methods({
     },
 
     updateUsersRoles: function (checkedUsers,newRole) {
-        Meteor.users.update({_id:{$in:checkedUsers}},{$set:{role:newRole}},{multi:true});
+	s3role='';
+	if (newRole==='admin') s3role='s3_admin';
+	if (newRole==='superEditor') s3role='s3_user';
+	if (newRole==='editor') s3role='s3_user';
+        Meteor.users.update({_id:{$in:checkedUsers}},{$set:{role:newRole, roles:s3role}},{multi:true});
     },
 
     deleteUser: function (uid) {

@@ -2,10 +2,25 @@
   {{> header}}
   <div class="page-header">
     <h1>{{header}}{{> buttonsEditDelete}}</h1>
-	<p id="addThisButtons"></p>
+
+<div class="row">
+
+	<div class="fb-like" data-href="{{currentPath}}" data-layout="button_count" data-action="recommend" data-show-faces="true" data-share="true"></div> 
+
+<div class="VKlike"></div>
+
+<div class="g-plusone" data-href="{{currentPath}}"></div>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="{{currentPath}}">Tweet</a>
+<div class="twitterButton"></div>
+
+
+<div class="GPlusLike"></div>
+</div>
+
   </div>
   <div class="col-lg-9">
-    <div class="row"><i>{{date}}</i></div>
+    <div class="row"><i>{{dateToUkrainian date}}</i></div>
     <div class="row"><br><b>{{{annotation}}}</b></div>
     <div class="row"><br>{{{newsText}}}</div>
 {{#if hasVideo}}

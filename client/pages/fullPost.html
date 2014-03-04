@@ -2,12 +2,27 @@
   {{> header}}
   <div class="page-header">
     <h1>{{header}}{{> buttonsEditDelete}}</h1>
-	<p id="addThisButtons"></p>
+
+<div class="row">
+
+	<div class="fb-like" data-href="{{currentPath}}" data-layout="button_count" data-action="recommend" data-show-faces="true" data-share="true"></div> 
+
+<div class="VKlike"></div>
+
+<div class="g-plusone" data-href="{{currentPath}}"></div>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="{{currentPath}}">Tweet</a>
+<div class="twitterButton"></div>
+
+
+<div class="GPlusLike"></div>
+</div>
+
   </div>
   <div class="col-lg-9">
     <div class="row"><i>{{dateToUkrainian date}}</i></div>
-    <div class="row"><br><b>{{{annotation}}}</b></div>
-    <div class="row"><br>{{{newsText}}}</div>
+    <div class="row text-justify"><br><b>{{{annotation}}}</b></div>
+    <div class="row text-justify"><br><img src="{{picture}}" class="image-rounded" width="300" align="right" style="padding:5px" >{{{newsText}}}</div>
 {{#if hasVideo}}
     <div class="row"><br><a href="{{videoLink}}" target="_blank">Відео до статті</a></div>
 {{/if}}
