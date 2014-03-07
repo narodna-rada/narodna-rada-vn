@@ -16,7 +16,7 @@ Template.postsList.events({
 	options.sourceLink=template.find('#sourceLink').value;
 	options.picture=template.find('#picture').value;
 	options.videoLink=template.find('#videoLink').value;
-
+console.log(options);
 	if (Session.get('postToEdit')) options.pid=Session.get('postToEdit');
 
 	Meteor.call('createPost',options, function (error, result){
@@ -31,7 +31,7 @@ Template.postsList.events({
 		$('#annotation').data("wysihtml5").editor.clear();
 		$('#newsText').data("wysihtml5").editor.clear();
 		template.find('#sourceLink').value="";
-		template.find('#picture').value="";
+		$('.imgForPost').html="";
 		template.find('#videoLink').value="";
 
                 Session.set("postSaved", true);
@@ -60,7 +60,7 @@ Template.postsList.events({
 	template.find('#newsText').value="";
 	$('#newsText').data("wysihtml5").editor.clear();
 	template.find('#sourceLink').value="";
-	template.find('#picture').value="";
+	$('.imgForPost').html="";
 	template.find('#videoLink').value="";
         Session.set("postSaved", null);
         Session.set("saveError", null);
@@ -186,7 +186,7 @@ Template.buttonsEditDelete.events({
     },
 
     'click .delete':function(event,template){
-	if (Meteor.user().role==='admin') Meteor.call('deletePost',event.currentTarget.id,function(){});
+	if ((Meteor.user().role==='admin') || (Meteor.user().role==='superEditor')) Meteor.call('deletePost',event.currentTarget.id,function(){});
     }
 });
     

@@ -19,7 +19,7 @@
  {{#if formResult}}
  <div class="alert alert-success alert-dismissable">
 <!--   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
-\u0412\u0430\u0448\u0456 \u0437\u043C\u0456\u043D\u0438 \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043D\u043E.
+Ваші зміни збережено.
 </div>
  {{/if}}
  {{#if formError}}
@@ -53,7 +53,7 @@
 	  <div class="radio">
 	    <label>
 	      <input type="radio" name="roleRadios" id="optionsRadios3" value="superEditor">
-	      <b>Редактор</b> - додавання текстів, редагування всіх текстів, призначення та звільнення кореспондентів
+	      <b>Редактор</b> - додавання текстів, редагування і видалення всіх текстів, призначення та звільнення кореспондентів і редакторів.
 	    </label>
 	  </div>
 	</td>
@@ -62,7 +62,7 @@
 	  <div class="radio">
 	    <label>
 	      <input type="radio" name="roleRadios" id="optionsRadios4" value="admin">
-	      <b>Адміністратор</b> - додавання і видалення текстів, редагування всіх текстів, призначення та звілення кореспондентів/редакторів/адміністраторів
+	      <b>Адміністратор</b> - додавання і видалення текстів, редагування всіх текстів, призначення та звілення кореспондентів/редакторів/адміністраторів, серверні налаштування для зберігання зображень.
 	    </label>
 	  </div>
 	</td>
@@ -83,6 +83,7 @@
 	      <td><b></b></td>
 	      <td><b>E-mail</b></td>
 	      <td><b>Поточна роль</b></td>
+	      {{#if checkRole "admin"}}<td></td>{{/if}}
 	    </tr>
 	  </thead>
 	  {{#each allUsers}}
@@ -93,6 +94,9 @@
 	    </td>
 	    <td>{{profile.name}} &nbsp; {{emails.0.address}} {{services.facebook.email}} {{services.google.email}} {{services.twitter.email}}</td>
 	    <td>{{roleUrk role}}</td>
+	    {{#if checkRole "admin"}}
+	    <td><a class="btn btn-danger delete" id="{{_id}}" role="button"><span class="glyphicon glyphicon-trash"></span></a></td>
+	    {{/if}}
 	  </tr>
 	  {{/if}}
 	  {{/each}}

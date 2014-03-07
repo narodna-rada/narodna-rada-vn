@@ -298,7 +298,7 @@ Meteor.methods({
     updateUsersRoles: function (checkedUsers,newRole) {
 	s3role='';
 	if (newRole==='admin') s3role='s3_admin';
-	if (newRole==='superEditor') s3role='s3_user';
+	if (newRole==='superEditor') s3role='s3_admin';
 	if (newRole==='editor') s3role='s3_user';
         Meteor.users.update({_id:{$in:checkedUsers}},{$set:{role:newRole, roles:s3role}},{multi:true});
     },
@@ -309,7 +309,7 @@ Meteor.methods({
     }, 
 
     deletePost: function (pid) {
-	if (Meteor.user().role==='admin') Posts.remove({_id:pid});
+	if ((Meteor.user().role==='admin') || (Meteor.user().role==='superEditor')) Posts.remove({_id:pid});
  
     }, 
 

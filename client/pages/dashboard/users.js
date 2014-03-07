@@ -41,7 +41,7 @@ Template.usersList.events({
  	    }); 
 	}
 	else {
-	    if ((Meteor.user().role==='superEditor') && (newRole!='superEditor') && (newRole!='admin')) {
+	    if ((Meteor.user().role==='superEditor') && (newRole!='admin')) {
 		Meteor.call('updateUsersRoles',checkedUsers,newRole,function(error,result){
 		    if (!error) {
 			//show success result

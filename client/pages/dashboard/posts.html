@@ -173,21 +173,25 @@
 
 <template name="buttonsEditDelete">
 {{#if currentUser}}  
-{{#if checkRole "editor"}}
-{{#if textOwner _id}}
-  &nbsp;<a class="btn btn-success edit" id="{{_id}}" role="button"><span class="glyphicon glyphicon-pencil"></span></a>
-{{/if}}
-{{else}}
-{{#if checkRole "superEditor"}}
-  &nbsp;<a class="btn btn-success edit" id="{{_id}}" role="button"><span class="glyphicon glyphicon-pencil"></span></a>
-{{else}}
-{{#if checkRole "admin"}}
-  &nbsp;<a class="btn btn-success edit" id="{{_id}}" role="button"><span class="glyphicon glyphicon-pencil"></span></a>
-{{/if}}
-{{/if}}
-{{/if}}
-{{#if checkRole "admin"}}
-  &nbsp;<a class="btn btn-danger delete" id="{{_id}}" role="button"><span class="glyphicon glyphicon-trash"></span></a> 
-{{/if}}
+	{{#if checkRole "editor"}}
+		{{#if textOwner _id}}
+			&nbsp;<a class="btn btn-success edit" id="{{_id}}" role="button"><span class="glyphicon glyphicon-pencil"></span></a>
+		{{/if}}
+	{{else}}
+		{{#if checkRole "superEditor"}}
+			&nbsp;<a class="btn btn-success edit" id="{{_id}}" role="button"><span class="glyphicon glyphicon-pencil"></span></a>
+		{{else}}
+			{{#if checkRole "admin"}}
+				&nbsp;<a class="btn btn-success edit" id="{{_id}}" role="button"><span class="glyphicon glyphicon-pencil"></span></a>
+			{{/if}}
+		{{/if}}
+	{{/if}}
+	{{#if checkRole "superEditor"}}
+		&nbsp;<a class="btn btn-danger delete" id="{{_id}}" role="button"><span class="glyphicon glyphicon-trash"></span></a> 
+	{{else}}
+		{{#if checkRole "admin"}}
+			&nbsp;<a class="btn btn-danger delete" id="{{_id}}" role="button"><span class="glyphicon glyphicon-trash"></span></a> 
+		{{/if}}
+	{{/if}}
 {{/if}}
 </template>

@@ -158,7 +158,7 @@
 
 <template name="postSmallPanel">
 	<h3>{{header}}</h3>
-	<img src="{{picture}}" class="image-rounded" width="150" align="right"><p class="text-justify">{{{annotation}}}</p>
+	<img src="{{picture}}" class="image-rounded" width="150" align="right" style="padding:5px" ><p class="text-justify">{{{annotation}}}</p>
 	<div class="row">
 	  <div class="col-lg-3">
 	    <i>{{dateToUkrainian date}}</i>
